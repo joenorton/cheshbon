@@ -1,0 +1,9 @@
+{
+  "table": "RAW_DM",
+  "columns": [
+    {"name": "SUBJID", "type": "string"},
+    {"name": "BRTHDT", "type": "date"},
+    {"name": "SEX", "type": "string"},
+    {"name": "RFSTDT", "type": "date"}
+  ]
+}

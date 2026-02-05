@@ -1,0 +1,7 @@
+{
+  "table": "RAW_DM",
+  "bindings": {
+    "BRTHDT": "s:BRTHDT",
+    "RFSTDTC": "s:RFSTDTC"
+  }
+}

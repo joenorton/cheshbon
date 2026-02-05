@@ -1,0 +1,9 @@
+{
+  "artifacts": [
+    {
+      "name": "graph.json",
+      "path": "artifacts/graph.json",
+      "sha256": "83f0cd4f3117770db0655bb2cfbfd8d4bd9c7413a9d4349c544cf865f5c9acd5"
+    }
+  ]
+}

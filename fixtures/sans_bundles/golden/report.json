@@ -1,0 +1,66 @@
+{
+  "report_schema_version": "0.3",
+  "plan_path": "artifacts/plan.ir.json",
+  "inputs": [
+    {
+      "role": "source",
+      "name": "analysis.sas",
+      "path": "inputs/source/analysis.sas",
+      "sha256": "27420ebd2844173aece627b83777d08d965a10326df23037e55d1c8b5fa794f9"
+    },
+    {
+      "role": "data",
+      "name": "source",
+      "path": "inputs/data/data.csv",
+      "sha256": "83ce5f7367c307b46a1f1dfa4bdb2d9db0c85578a4950f7ef661b4f3b9597a70"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "plan.ir.json",
+      "path": "artifacts/plan.ir.json",
+      "sha256": "f3b9d01689c8bd033fb5b69022d8b8a2de57b8d9aa0e0f30a1ee17a170a4e967"
+    },
+    {
+      "name": "runtime.evidence.json",
+      "path": "artifacts/runtime.evidence.json",
+      "sha256": "f2ac36b2195dbcab4e58866c30e528b710da345b9b377e5824e34ebdb08aecea"
+    },
+    {
+      "name": "registry.candidate.json",
+      "path": "artifacts/registry.candidate.json",
+      "sha256": "8b723e89f83348f074867a91f4959cb86296d82246fd9a73428ccf75586432e9"
+    },
+    {
+      "name": "graph.json",
+      "path": "artifacts/graph.json",
+      "sha256": "cc07a0c547831c964325c7ffd25c3f4b1a9a01ff8d2595d0c087341aea034d77"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "high_value",
+      "path": "outputs/high_value.csv",
+      "sha256": "d8f22210938f2016955107b21ffca58fb34523fe1b93f3c21cb0d902cf0d0604",
+      "rows": 3,
+      "columns": [
+        "name",
+        "value",
+        "label"
+      ]
+    },
+    {
+      "name": "sorted_high",
+      "path": "outputs/sorted_high.csv",
+      "sha256": "d8f22210938f2016955107b21ffca58fb34523fe1b93f3c21cb0d902cf0d0604",
+      "rows": 3,
+      "columns": [
+        "name",
+        "value",
+        "label"
+      ]
+    }
+  ],
+  "run_id": "76a5baf5-dcb4-45a7-bcc8-46f72d4fd75b",
+  "created_at": "2026-02-01T07:25:49.288894Z"
+}

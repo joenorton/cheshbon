@@ -1,0 +1,64 @@
+{
+  "spec_version": "1.0.0",
+  "study_id": "ABC-101",
+  "source_table": "RAW_DM",
+  "sources": [
+    {
+      "id": "s:SUBJID",
+      "name": "SUBJID",
+      "type": "string"
+    },
+    {
+      "id": "s:BRTHDT",
+      "name": "BRTHDT",
+      "type": "date"
+    },
+    {
+      "id": "s:SEX",
+      "name": "SEX",
+      "type": "string"
+    }
+  ],
+  "derived": [
+    {
+      "id": "d:USUBJID",
+      "name": "USUBJID",
+      "type": "string",
+      "transform_ref": "t:direct_copy",
+      "inputs": ["s:SUBJID"],
+      "notes": "Direct copy of subject identifier"
+    },
+    {
+      "id": "d:AGE",
+      "name": "AGE",
+      "type": "int",
+      "transform_ref": "t:age_calculation",
+      "inputs": ["s:BRTHDT", "s:RFSTDTC"],
+      "notes": "ERROR: Still references s:RFSTDTC which was removed"
+    },
+    {
+      "id": "d:AGEGRP",
+      "name": "AGEGRP",
+      "type": "string",
+      "transform_ref": "t:age_bucket",
+      "inputs": ["d:AGE"],
+      "notes": "Bucket age into groups: <18, 18-65, >65"
+    },
+    {
+      "id": "d:SEX_CDISC",
+      "name": "SEX_CDISC",
+      "type": "string",
+      "transform_ref": "t:ct_map",
+      "inputs": ["s:SEX"],
+      "params": {
+        "map": {
+          "M": "M",
+          "F": "F",
+          "Male": "M",
+          "Female": "F"
+        }
+      },
+      "notes": "Map to CDISC controlled terminology"
+    }
+  ]
+}

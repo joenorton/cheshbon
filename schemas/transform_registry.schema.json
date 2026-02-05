@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "ImplFingerprint": {
+      "description": "Structured fingerprint for transform implementation.\n\nEnables sane explanations (\"impl changed: file X digest changed\")\ninstead of just a hash.",
+      "properties": {
+        "algo": {
+          "const": "sha256",
+          "default": "sha256",
+          "title": "Algo",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "builtin",
+            "external_sas",
+            "external_py",
+            "template_sas",
+            "file",
+            "git"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "digest": {
+          "title": "Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "ref",
+        "digest"
+      ],
+      "title": "ImplFingerprint",
+      "type": "object"
+    },
+    "Signature": {
+      "additionalProperties": false,
+      "description": "Transform signature with explicit input/output types.\n\n- inputs: List of input type strings\n- output: Single output type string (not a list)\n- Future: If multi-output needed, add 'outputs' field (mutually exclusive with 'output')",
+      "properties": {
+        "inputs": {
+          "description": "List of input type strings",
+          "items": {
+            "type": "string"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "output": {
+          "description": "Single output type string",
+          "title": "Output",
+          "type": "string"
+        }
+      },
+      "required": [
+        "inputs",
+        "output"
+      ],
+      "title": "Signature",
+      "type": "object"
+    },
+    "TransformEntry": {
+      "description": "A transform registry entry.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "builtin",
+            "external_sas",
+            "external_py",
+            "template_sas"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "signature": {
+          "$ref": "#/$defs/Signature",
+          "description": "Transform signature with inputs (list) and output (single type string)"
+        },
+        "params_schema_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "SHA256 hash of JSON schema for params (prefixed with 'sha256:'), or null for no-params transforms",
+          "title": "Params Schema Hash"
+        },
+        "impl_fingerprint": {
+          "$ref": "#/$defs/ImplFingerprint"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "kind",
+        "signature",
+        "impl_fingerprint"
+      ],
+      "title": "TransformEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Transform registry containing all available transforms.",
+  "properties": {
+    "registry_version": {
+      "title": "Registry Version",
+      "type": "string"
+    },
+    "transforms": {
+      "items": {
+        "$ref": "#/$defs/TransformEntry"
+      },
+      "title": "Transforms",
+      "type": "array"
+    }
+  },
+  "required": [
+    "registry_version",
+    "transforms"
+  ],
+  "title": "TransformRegistry",
+  "type": "object"
+}

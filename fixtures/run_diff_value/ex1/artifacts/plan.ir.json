@@ -1,0 +1,1 @@
+{"steps": [{"kind": "op", "op": "compute", "inputs": ["source"], "outputs": ["high_value__1"], "params": {}, "transform_id": "tx1", "step_id": "step1"}], "tables": ["source"]}

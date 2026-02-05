@@ -1,0 +1,2139 @@
+{
+  "spec_version": "1.0.1",
+  "study_id": "SENTINEL-BINDING",
+  "source_table": "RAW_SENTINEL",
+  "sources": [
+    {
+      "id": "s:COL001",
+      "name": "COL001",
+      "type": "string"
+    },
+    {
+      "id": "s:COL002",
+      "name": "COL002",
+      "type": "string"
+    },
+    {
+      "id": "s:COL003",
+      "name": "COL003",
+      "type": "string"
+    },
+    {
+      "id": "s:COL004",
+      "name": "COL004",
+      "type": "string"
+    },
+    {
+      "id": "s:COL005",
+      "name": "COL005",
+      "type": "string"
+    },
+    {
+      "id": "s:COL006",
+      "name": "COL006",
+      "type": "string"
+    },
+    {
+      "id": "s:COL007",
+      "name": "COL007",
+      "type": "string"
+    },
+    {
+      "id": "s:COL008",
+      "name": "COL008",
+      "type": "string"
+    },
+    {
+      "id": "s:COL009",
+      "name": "COL009",
+      "type": "string"
+    },
+    {
+      "id": "s:COL010",
+      "name": "COL010",
+      "type": "string"
+    },
+    {
+      "id": "s:COL011",
+      "name": "COL011",
+      "type": "string"
+    },
+    {
+      "id": "s:COL012",
+      "name": "COL012",
+      "type": "string"
+    },
+    {
+      "id": "s:COL013",
+      "name": "COL013",
+      "type": "string"
+    },
+    {
+      "id": "s:COL014",
+      "name": "COL014",
+      "type": "string"
+    },
+    {
+      "id": "s:COL015",
+      "name": "COL015",
+      "type": "string"
+    },
+    {
+      "id": "s:COL016",
+      "name": "COL016",
+      "type": "string"
+    },
+    {
+      "id": "s:COL017",
+      "name": "COL017",
+      "type": "string"
+    },
+    {
+      "id": "s:COL018",
+      "name": "COL018",
+      "type": "string"
+    },
+    {
+      "id": "s:COL019",
+      "name": "COL019",
+      "type": "string"
+    },
+    {
+      "id": "s:COL020",
+      "name": "COL020",
+      "type": "string"
+    },
+    {
+      "id": "s:COL021",
+      "name": "COL021",
+      "type": "string"
+    },
+    {
+      "id": "s:COL022",
+      "name": "COL022",
+      "type": "string"
+    },
+    {
+      "id": "s:COL023",
+      "name": "COL023",
+      "type": "string"
+    },
+    {
+      "id": "s:COL024",
+      "name": "COL024",
+      "type": "string"
+    },
+    {
+      "id": "s:COL025",
+      "name": "COL025",
+      "type": "string"
+    },
+    {
+      "id": "s:COL026",
+      "name": "COL026",
+      "type": "string"
+    },
+    {
+      "id": "s:COL027",
+      "name": "COL027",
+      "type": "string"
+    },
+    {
+      "id": "s:COL028",
+      "name": "COL028",
+      "type": "string"
+    },
+    {
+      "id": "s:COL029",
+      "name": "COL029",
+      "type": "string"
+    },
+    {
+      "id": "s:COL030",
+      "name": "COL030",
+      "type": "string"
+    },
+    {
+      "id": "s:COL031",
+      "name": "COL031",
+      "type": "string"
+    },
+    {
+      "id": "s:COL032",
+      "name": "COL032",
+      "type": "string"
+    },
+    {
+      "id": "s:COL033",
+      "name": "COL033",
+      "type": "string"
+    },
+    {
+      "id": "s:COL034",
+      "name": "COL034",
+      "type": "string"
+    },
+    {
+      "id": "s:COL035",
+      "name": "COL035",
+      "type": "string"
+    },
+    {
+      "id": "s:COL036",
+      "name": "COL036",
+      "type": "string"
+    },
+    {
+      "id": "s:COL037",
+      "name": "COL037",
+      "type": "string"
+    },
+    {
+      "id": "s:COL038",
+      "name": "COL038",
+      "type": "string"
+    },
+    {
+      "id": "s:COL039",
+      "name": "COL039",
+      "type": "string"
+    },
+    {
+      "id": "s:COL040",
+      "name": "COL040",
+      "type": "string"
+    },
+    {
+      "id": "s:COL041",
+      "name": "COL041",
+      "type": "string"
+    },
+    {
+      "id": "s:COL042",
+      "name": "COL042",
+      "type": "string"
+    },
+    {
+      "id": "s:COL043",
+      "name": "COL043",
+      "type": "string"
+    },
+    {
+      "id": "s:COL044",
+      "name": "COL044",
+      "type": "string"
+    },
+    {
+      "id": "s:COL045",
+      "name": "COL045",
+      "type": "string"
+    },
+    {
+      "id": "s:COL046",
+      "name": "COL046",
+      "type": "string"
+    },
+    {
+      "id": "s:COL047",
+      "name": "COL047",
+      "type": "string"
+    },
+    {
+      "id": "s:COL048",
+      "name": "COL048",
+      "type": "string"
+    },
+    {
+      "id": "s:COL049",
+      "name": "COL049",
+      "type": "string"
+    },
+    {
+      "id": "s:COL050",
+      "name": "COL050",
+      "type": "string"
+    },
+    {
+      "id": "s:COL051",
+      "name": "COL051",
+      "type": "string"
+    },
+    {
+      "id": "s:COL052",
+      "name": "COL052",
+      "type": "string"
+    },
+    {
+      "id": "s:COL053",
+      "name": "COL053",
+      "type": "string"
+    },
+    {
+      "id": "s:COL054",
+      "name": "COL054",
+      "type": "string"
+    },
+    {
+      "id": "s:COL055",
+      "name": "COL055",
+      "type": "string"
+    },
+    {
+      "id": "s:COL056",
+      "name": "COL056",
+      "type": "string"
+    },
+    {
+      "id": "s:COL057",
+      "name": "COL057",
+      "type": "string"
+    },
+    {
+      "id": "s:COL058",
+      "name": "COL058",
+      "type": "string"
+    },
+    {
+      "id": "s:COL059",
+      "name": "COL059",
+      "type": "string"
+    },
+    {
+      "id": "s:COL060",
+      "name": "COL060",
+      "type": "string"
+    },
+    {
+      "id": "s:COL061",
+      "name": "COL061",
+      "type": "string"
+    },
+    {
+      "id": "s:COL062",
+      "name": "COL062",
+      "type": "string"
+    },
+    {
+      "id": "s:COL063",
+      "name": "COL063",
+      "type": "string"
+    },
+    {
+      "id": "s:COL064",
+      "name": "COL064",
+      "type": "string"
+    },
+    {
+      "id": "s:COL065",
+      "name": "COL065",
+      "type": "string"
+    },
+    {
+      "id": "s:COL066",
+      "name": "COL066",
+      "type": "string"
+    },
+    {
+      "id": "s:COL067",
+      "name": "COL067",
+      "type": "string"
+    },
+    {
+      "id": "s:COL068",
+      "name": "COL068",
+      "type": "string"
+    },
+    {
+      "id": "s:COL069",
+      "name": "COL069",
+      "type": "string"
+    },
+    {
+      "id": "s:COL070",
+      "name": "COL070",
+      "type": "string"
+    },
+    {
+      "id": "s:COL071",
+      "name": "COL071",
+      "type": "string"
+    },
+    {
+      "id": "s:COL072",
+      "name": "COL072",
+      "type": "string"
+    },
+    {
+      "id": "s:COL073",
+      "name": "COL073",
+      "type": "string"
+    },
+    {
+      "id": "s:COL074",
+      "name": "COL074",
+      "type": "string"
+    },
+    {
+      "id": "s:COL075",
+      "name": "COL075",
+      "type": "string"
+    },
+    {
+      "id": "s:COL076",
+      "name": "COL076",
+      "type": "string"
+    },
+    {
+      "id": "s:COL077",
+      "name": "COL077",
+      "type": "string"
+    },
+    {
+      "id": "s:COL078",
+      "name": "COL078",
+      "type": "string"
+    },
+    {
+      "id": "s:COL079",
+      "name": "COL079",
+      "type": "string"
+    },
+    {
+      "id": "s:COL080",
+      "name": "COL080",
+      "type": "string"
+    },
+    {
+      "id": "s:COL081",
+      "name": "COL081",
+      "type": "string"
+    },
+    {
+      "id": "s:COL082",
+      "name": "COL082",
+      "type": "string"
+    },
+    {
+      "id": "s:COL083",
+      "name": "COL083",
+      "type": "string"
+    },
+    {
+      "id": "s:COL084",
+      "name": "COL084",
+      "type": "string"
+    },
+    {
+      "id": "s:COL085",
+      "name": "COL085",
+      "type": "string"
+    },
+    {
+      "id": "s:COL086",
+      "name": "COL086",
+      "type": "string"
+    },
+    {
+      "id": "s:COL087",
+      "name": "COL087",
+      "type": "string"
+    },
+    {
+      "id": "s:COL088",
+      "name": "COL088",
+      "type": "string"
+    },
+    {
+      "id": "s:COL089",
+      "name": "COL089",
+      "type": "string"
+    },
+    {
+      "id": "s:COL090",
+      "name": "COL090",
+      "type": "string"
+    },
+    {
+      "id": "s:COL091",
+      "name": "COL091",
+      "type": "string"
+    },
+    {
+      "id": "s:COL092",
+      "name": "COL092",
+      "type": "string"
+    },
+    {
+      "id": "s:COL093",
+      "name": "COL093",
+      "type": "string"
+    },
+    {
+      "id": "s:COL094",
+      "name": "COL094",
+      "type": "string"
+    },
+    {
+      "id": "s:COL095",
+      "name": "COL095",
+      "type": "string"
+    },
+    {
+      "id": "s:COL096",
+      "name": "COL096",
+      "type": "string"
+    },
+    {
+      "id": "s:COL097",
+      "name": "COL097",
+      "type": "string"
+    },
+    {
+      "id": "s:COL098",
+      "name": "COL098",
+      "type": "string"
+    },
+    {
+      "id": "s:COL099",
+      "name": "COL099",
+      "type": "string"
+    },
+    {
+      "id": "s:COL100",
+      "name": "COL100",
+      "type": "string"
+    },
+    {
+      "id": "s:COL101",
+      "name": "COL101",
+      "type": "string"
+    },
+    {
+      "id": "s:COL102",
+      "name": "COL102",
+      "type": "string"
+    },
+    {
+      "id": "s:COL103",
+      "name": "COL103",
+      "type": "string"
+    },
+    {
+      "id": "s:COL104",
+      "name": "COL104",
+      "type": "string"
+    },
+    {
+      "id": "s:COL105",
+      "name": "COL105",
+      "type": "string"
+    },
+    {
+      "id": "s:COL106",
+      "name": "COL106",
+      "type": "string"
+    },
+    {
+      "id": "s:COL107",
+      "name": "COL107",
+      "type": "string"
+    },
+    {
+      "id": "s:COL108",
+      "name": "COL108",
+      "type": "string"
+    },
+    {
+      "id": "s:COL109",
+      "name": "COL109",
+      "type": "string"
+    },
+    {
+      "id": "s:COL110",
+      "name": "COL110",
+      "type": "string"
+    },
+    {
+      "id": "s:COL111",
+      "name": "COL111",
+      "type": "string"
+    },
+    {
+      "id": "s:COL112",
+      "name": "COL112",
+      "type": "string"
+    },
+    {
+      "id": "s:COL113",
+      "name": "COL113",
+      "type": "string"
+    },
+    {
+      "id": "s:COL114",
+      "name": "COL114",
+      "type": "string"
+    },
+    {
+      "id": "s:COL115",
+      "name": "COL115",
+      "type": "string"
+    },
+    {
+      "id": "s:COL116",
+      "name": "COL116",
+      "type": "string"
+    },
+    {
+      "id": "s:COL117",
+      "name": "COL117",
+      "type": "string"
+    },
+    {
+      "id": "s:COL118",
+      "name": "COL118",
+      "type": "string"
+    },
+    {
+      "id": "s:COL119",
+      "name": "COL119",
+      "type": "string"
+    },
+    {
+      "id": "s:COL120",
+      "name": "COL120",
+      "type": "string"
+    },
+    {
+      "id": "s:COL121",
+      "name": "COL121",
+      "type": "string"
+    },
+    {
+      "id": "s:COL122",
+      "name": "COL122",
+      "type": "string"
+    },
+    {
+      "id": "s:COL123",
+      "name": "COL123",
+      "type": "string"
+    },
+    {
+      "id": "s:COL124",
+      "name": "COL124",
+      "type": "string"
+    },
+    {
+      "id": "s:COL125",
+      "name": "COL125",
+      "type": "string"
+    },
+    {
+      "id": "s:COL126",
+      "name": "COL126",
+      "type": "string"
+    },
+    {
+      "id": "s:COL127",
+      "name": "COL127",
+      "type": "string"
+    },
+    {
+      "id": "s:COL128",
+      "name": "COL128",
+      "type": "string"
+    },
+    {
+      "id": "s:COL129",
+      "name": "COL129",
+      "type": "string"
+    },
+    {
+      "id": "s:COL130",
+      "name": "COL130",
+      "type": "string"
+    },
+    {
+      "id": "s:COL131",
+      "name": "COL131",
+      "type": "string"
+    },
+    {
+      "id": "s:COL132",
+      "name": "COL132",
+      "type": "string"
+    },
+    {
+      "id": "s:COL133",
+      "name": "COL133",
+      "type": "string"
+    },
+    {
+      "id": "s:COL134",
+      "name": "COL134",
+      "type": "string"
+    },
+    {
+      "id": "s:COL135",
+      "name": "COL135",
+      "type": "string"
+    },
+    {
+      "id": "s:COL136",
+      "name": "COL136",
+      "type": "string"
+    },
+    {
+      "id": "s:COL137",
+      "name": "COL137",
+      "type": "string"
+    },
+    {
+      "id": "s:COL138",
+      "name": "COL138",
+      "type": "string"
+    },
+    {
+      "id": "s:COL139",
+      "name": "COL139",
+      "type": "string"
+    },
+    {
+      "id": "s:COL140",
+      "name": "COL140",
+      "type": "string"
+    },
+    {
+      "id": "s:COL141",
+      "name": "COL141",
+      "type": "string"
+    },
+    {
+      "id": "s:COL142",
+      "name": "COL142",
+      "type": "string"
+    },
+    {
+      "id": "s:COL143",
+      "name": "COL143",
+      "type": "string"
+    },
+    {
+      "id": "s:COL144",
+      "name": "COL144",
+      "type": "string"
+    },
+    {
+      "id": "s:COL145",
+      "name": "COL145",
+      "type": "string"
+    },
+    {
+      "id": "s:COL146",
+      "name": "COL146",
+      "type": "string"
+    },
+    {
+      "id": "s:COL147",
+      "name": "COL147",
+      "type": "string"
+    },
+    {
+      "id": "s:COL148",
+      "name": "COL148",
+      "type": "string"
+    },
+    {
+      "id": "s:COL149",
+      "name": "COL149",
+      "type": "string"
+    },
+    {
+      "id": "s:COL150",
+      "name": "COL150",
+      "type": "string"
+    },
+    {
+      "id": "s:COL151",
+      "name": "COL151",
+      "type": "string"
+    },
+    {
+      "id": "s:COL152",
+      "name": "COL152",
+      "type": "string"
+    },
+    {
+      "id": "s:COL153",
+      "name": "COL153",
+      "type": "string"
+    },
+    {
+      "id": "s:COL154",
+      "name": "COL154",
+      "type": "string"
+    },
+    {
+      "id": "s:COL155",
+      "name": "COL155",
+      "type": "string"
+    },
+    {
+      "id": "s:COL156",
+      "name": "COL156",
+      "type": "string"
+    },
+    {
+      "id": "s:COL157",
+      "name": "COL157",
+      "type": "string"
+    },
+    {
+      "id": "s:COL158",
+      "name": "COL158",
+      "type": "string"
+    },
+    {
+      "id": "s:COL159",
+      "name": "COL159",
+      "type": "string"
+    },
+    {
+      "id": "s:COL160",
+      "name": "COL160",
+      "type": "string"
+    },
+    {
+      "id": "s:COL161",
+      "name": "COL161",
+      "type": "string"
+    },
+    {
+      "id": "s:COL162",
+      "name": "COL162",
+      "type": "string"
+    },
+    {
+      "id": "s:COL163",
+      "name": "COL163",
+      "type": "string"
+    },
+    {
+      "id": "s:COL164",
+      "name": "COL164",
+      "type": "string"
+    },
+    {
+      "id": "s:COL165",
+      "name": "COL165",
+      "type": "string"
+    },
+    {
+      "id": "s:COL166",
+      "name": "COL166",
+      "type": "string"
+    },
+    {
+      "id": "s:COL167",
+      "name": "COL167",
+      "type": "string"
+    },
+    {
+      "id": "s:COL168",
+      "name": "COL168",
+      "type": "string"
+    },
+    {
+      "id": "s:COL169",
+      "name": "COL169",
+      "type": "string"
+    },
+    {
+      "id": "s:COL170",
+      "name": "COL170",
+      "type": "string"
+    },
+    {
+      "id": "s:COL171",
+      "name": "COL171",
+      "type": "string"
+    },
+    {
+      "id": "s:COL172",
+      "name": "COL172",
+      "type": "string"
+    },
+    {
+      "id": "s:COL173",
+      "name": "COL173",
+      "type": "string"
+    },
+    {
+      "id": "s:COL174",
+      "name": "COL174",
+      "type": "string"
+    },
+    {
+      "id": "s:COL175",
+      "name": "COL175",
+      "type": "string"
+    },
+    {
+      "id": "s:COL176",
+      "name": "COL176",
+      "type": "string"
+    },
+    {
+      "id": "s:COL177",
+      "name": "COL177",
+      "type": "string"
+    },
+    {
+      "id": "s:COL178",
+      "name": "COL178",
+      "type": "string"
+    },
+    {
+      "id": "s:COL179",
+      "name": "COL179",
+      "type": "string"
+    },
+    {
+      "id": "s:COL180",
+      "name": "COL180",
+      "type": "string"
+    },
+    {
+      "id": "s:COL181",
+      "name": "COL181",
+      "type": "string"
+    },
+    {
+      "id": "s:COL182",
+      "name": "COL182",
+      "type": "string"
+    },
+    {
+      "id": "s:COL183",
+      "name": "COL183",
+      "type": "string"
+    },
+    {
+      "id": "s:COL184",
+      "name": "COL184",
+      "type": "string"
+    },
+    {
+      "id": "s:COL185",
+      "name": "COL185",
+      "type": "string"
+    },
+    {
+      "id": "s:COL186",
+      "name": "COL186",
+      "type": "string"
+    },
+    {
+      "id": "s:COL187",
+      "name": "COL187",
+      "type": "string"
+    },
+    {
+      "id": "s:COL188",
+      "name": "COL188",
+      "type": "string"
+    },
+    {
+      "id": "s:COL189",
+      "name": "COL189",
+      "type": "string"
+    },
+    {
+      "id": "s:COL190",
+      "name": "COL190",
+      "type": "string"
+    },
+    {
+      "id": "s:COL191",
+      "name": "COL191",
+      "type": "string"
+    },
+    {
+      "id": "s:COL192",
+      "name": "COL192",
+      "type": "string"
+    },
+    {
+      "id": "s:COL193",
+      "name": "COL193",
+      "type": "string"
+    },
+    {
+      "id": "s:COL194",
+      "name": "COL194",
+      "type": "string"
+    },
+    {
+      "id": "s:COL195",
+      "name": "COL195",
+      "type": "string"
+    },
+    {
+      "id": "s:COL196",
+      "name": "COL196",
+      "type": "string"
+    },
+    {
+      "id": "s:COL197",
+      "name": "COL197",
+      "type": "string"
+    },
+    {
+      "id": "s:COL198",
+      "name": "COL198",
+      "type": "string"
+    },
+    {
+      "id": "s:COL199",
+      "name": "COL199",
+      "type": "string"
+    },
+    {
+      "id": "s:COL200",
+      "name": "COL200",
+      "type": "string"
+    }
+  ],
+  "derived": [
+    {
+      "id": "d:DER001",
+      "name": "DER001",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL001",
+        "s:COL002"
+      ],
+      "params": {
+        "version": 2
+      }
+    },
+    {
+      "id": "d:DER002",
+      "name": "DER002",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL002",
+        "s:COL003"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER003",
+      "name": "DER003",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL003",
+        "s:COL004"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER004",
+      "name": "DER004",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL004",
+        "s:COL005"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER005",
+      "name": "DER005",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL005",
+        "s:COL006"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER006",
+      "name": "DER006",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL006",
+        "s:COL007"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER007",
+      "name": "DER007",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL007",
+        "s:COL008"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER008",
+      "name": "DER008",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL008",
+        "s:COL009"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER009",
+      "name": "DER009",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL009",
+        "s:COL010"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER010",
+      "name": "DER010",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL010",
+        "s:COL011"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER011",
+      "name": "DER011",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL011",
+        "s:COL012"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER012",
+      "name": "DER012",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL012",
+        "s:COL013"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER013",
+      "name": "DER013",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL013",
+        "s:COL014"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER014",
+      "name": "DER014",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL014",
+        "s:COL015"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER015",
+      "name": "DER015",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL015",
+        "s:COL016"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER016",
+      "name": "DER016",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL016",
+        "s:COL017"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER017",
+      "name": "DER017",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL017",
+        "s:COL018"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER018",
+      "name": "DER018",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL018",
+        "s:COL019"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER019",
+      "name": "DER019",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL019",
+        "s:COL020"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER020",
+      "name": "DER020",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL020",
+        "s:COL021"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER021",
+      "name": "DER021",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL021",
+        "s:COL022"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER022",
+      "name": "DER022",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL022",
+        "s:COL023"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER023",
+      "name": "DER023",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL023",
+        "s:COL024"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER024",
+      "name": "DER024",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL024",
+        "s:COL025"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER025",
+      "name": "DER025",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL025",
+        "s:COL026"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER026",
+      "name": "DER026",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL026",
+        "s:COL027"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER027",
+      "name": "DER027",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL027",
+        "s:COL028"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER028",
+      "name": "DER028",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL028",
+        "s:COL029"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER029",
+      "name": "DER029",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL029",
+        "s:COL030"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER030",
+      "name": "DER030",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL030",
+        "s:COL031"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER031",
+      "name": "DER031",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL031",
+        "s:COL032"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER032",
+      "name": "DER032",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL032",
+        "s:COL033"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER033",
+      "name": "DER033",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL033",
+        "s:COL034"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER034",
+      "name": "DER034",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL034",
+        "s:COL035"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER035",
+      "name": "DER035",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL035",
+        "s:COL036"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER036",
+      "name": "DER036",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL036",
+        "s:COL037"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER037",
+      "name": "DER037",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL037",
+        "s:COL038"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER038",
+      "name": "DER038",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL038",
+        "s:COL039"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER039",
+      "name": "DER039",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL039",
+        "s:COL040"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER040",
+      "name": "DER040",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL040",
+        "s:COL041"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER041",
+      "name": "DER041",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL041",
+        "s:COL042"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER042",
+      "name": "DER042",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL042",
+        "s:COL043"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER043",
+      "name": "DER043",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL043",
+        "s:COL044"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER044",
+      "name": "DER044",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL044",
+        "s:COL045"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER045",
+      "name": "DER045",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL045",
+        "s:COL046"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER046",
+      "name": "DER046",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL046",
+        "s:COL047"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER047",
+      "name": "DER047",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL047",
+        "s:COL048"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER048",
+      "name": "DER048",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL048",
+        "s:COL049"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER049",
+      "name": "DER049",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL049",
+        "s:COL050"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER050",
+      "name": "DER050",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL050",
+        "s:COL051"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER051",
+      "name": "DER051",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL051",
+        "s:COL052"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER052",
+      "name": "DER052",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL052",
+        "s:COL053"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER053",
+      "name": "DER053",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL053",
+        "s:COL054"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER054",
+      "name": "DER054",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL054",
+        "s:COL055"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER055",
+      "name": "DER055",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL055",
+        "s:COL056"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER056",
+      "name": "DER056",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL056",
+        "s:COL057"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER057",
+      "name": "DER057",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL057",
+        "s:COL058"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER058",
+      "name": "DER058",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL058",
+        "s:COL059"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER059",
+      "name": "DER059",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL059",
+        "s:COL060"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER060",
+      "name": "DER060",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL060",
+        "s:COL061"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER061",
+      "name": "DER061",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL061",
+        "s:COL062"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER062",
+      "name": "DER062",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL062",
+        "s:COL063"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER063",
+      "name": "DER063",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL063",
+        "s:COL064"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER064",
+      "name": "DER064",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL064",
+        "s:COL065"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER065",
+      "name": "DER065",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL065",
+        "s:COL066"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER066",
+      "name": "DER066",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL066",
+        "s:COL067"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER067",
+      "name": "DER067",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL067",
+        "s:COL068"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER068",
+      "name": "DER068",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL068",
+        "s:COL069"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER069",
+      "name": "DER069",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL069",
+        "s:COL070"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER070",
+      "name": "DER070",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL070",
+        "s:COL071"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER071",
+      "name": "DER071",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL071",
+        "s:COL072"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER072",
+      "name": "DER072",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL072",
+        "s:COL073"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER073",
+      "name": "DER073",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL073",
+        "s:COL074"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER074",
+      "name": "DER074",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL074",
+        "s:COL075"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER075",
+      "name": "DER075",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL075",
+        "s:COL076"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER076",
+      "name": "DER076",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL076",
+        "s:COL077"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER077",
+      "name": "DER077",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL077",
+        "s:COL078"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER078",
+      "name": "DER078",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL078",
+        "s:COL079"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER079",
+      "name": "DER079",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL079",
+        "s:COL080"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:DER080",
+      "name": "DER080",
+      "type": "string",
+      "transform_ref": "t:calc",
+      "inputs": [
+        "s:COL199",
+        "s:COL200"
+      ],
+      "params": {
+        "version": 1
+      }
+    },
+    {
+      "id": "d:TAIL001",
+      "name": "TAIL001",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:DER080"
+      ]
+    },
+    {
+      "id": "d:TAIL002",
+      "name": "TAIL002",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL001"
+      ]
+    },
+    {
+      "id": "d:TAIL003",
+      "name": "TAIL003",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL002"
+      ]
+    },
+    {
+      "id": "d:TAIL004",
+      "name": "TAIL004",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL003"
+      ]
+    },
+    {
+      "id": "d:TAIL005",
+      "name": "TAIL005",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL004"
+      ]
+    },
+    {
+      "id": "d:TAIL006",
+      "name": "TAIL006",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL005"
+      ]
+    },
+    {
+      "id": "d:TAIL007",
+      "name": "TAIL007",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL006"
+      ]
+    },
+    {
+      "id": "d:TAIL008",
+      "name": "TAIL008",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL007"
+      ]
+    },
+    {
+      "id": "d:TAIL009",
+      "name": "TAIL009",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL008"
+      ]
+    },
+    {
+      "id": "d:TAIL010",
+      "name": "TAIL010",
+      "type": "string",
+      "transform_ref": "t:identity",
+      "inputs": [
+        "d:TAIL009"
+      ]
+    }
+  ]
+}

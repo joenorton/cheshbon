@@ -1,0 +1,21 @@
+{
+  "spec_version": "1.0.0",
+  "study_id": "TEST-001",
+  "source_table": "RAW_DM",
+  "sources": [
+    {
+      "id": "s:SUBJID",
+      "name": "SUBJID",
+      "type": "string"
+    }
+  ],
+  "derived": [
+    {
+      "id": "d:USUBJID",
+      "name": "SUBJECT_ID",
+      "type": "string",
+      "transform_ref": "t:direct_copy",
+      "inputs": ["s:SUBJID"]
+    }
+  ]
+}

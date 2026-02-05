@@ -1,0 +1,103 @@
+{
+  "sans_version": "0.1.0",
+  "run_id": "92c34bf8-77cf-4275-b237-117837f7e9e4",
+  "created_at": "2026-02-04T16:58:36.813074Z",
+  "plan_ir": {
+    "path": "artifacts/plan.ir.json",
+    "sha256": "6ec356d078072858bd1ea89aa755186d40f16f507d70fe9bca6280ef50f57d80"
+  },
+  "bindings": {
+    "source": "source.csv"
+  },
+  "inputs": [
+    {
+      "name": "source",
+      "path": "inputs/data/source.csv",
+      "sha256": "83ce5f7367c307b46a1f1dfa4bdb2d9db0c85578a4950f7ef661b4f3b9597a70"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sorted_high",
+      "path": "outputs/sorted_high.csv",
+      "row_count": 3,
+      "columns": [
+        "name",
+        "value",
+        "label"
+      ]
+    },
+    {
+      "name": "high_value",
+      "path": "outputs/high_value.csv",
+      "row_count": 3,
+      "columns": [
+        "name",
+        "value",
+        "label"
+      ]
+    }
+  ],
+  "step_evidence": [
+    {
+      "step_index": 0,
+      "step_id": "1ccc13ed7f2ba1d8dcae333ba6a18ed098da944009f7a3e810930a860488601f",
+      "transform_id": "80d192f41ea8c0d5f47b1ce060847a280d39fa76ed895224eec3969b2b4cba2f",
+      "op": "compute",
+      "inputs": [
+        "source"
+      ],
+      "outputs": [
+        "high_value__1"
+      ],
+      "row_counts": {
+        "high_value__1": 5
+      }
+    },
+    {
+      "step_index": 1,
+      "step_id": "977b7390ce7cf819f15b1aa0823523930b3f85d861a67cef04b126402efb1742",
+      "transform_id": "f197962a3c03ef7517a518ff9dff5574903a89916ffeb1006f41686711cfaef8",
+      "op": "filter",
+      "inputs": [
+        "high_value__1"
+      ],
+      "outputs": [
+        "high_value__2"
+      ],
+      "row_counts": {
+        "high_value__2": 3
+      }
+    },
+    {
+      "step_index": 2,
+      "step_id": "e1bafba763900b9b4669993a01eb85e324483236aa9ffc7beef4cde19466a720",
+      "transform_id": "def97c2477de8c05d63bc26ad9a37732a92734f3ca1c1a0fbf0155371e320c91",
+      "op": "select",
+      "inputs": [
+        "high_value__2"
+      ],
+      "outputs": [
+        "high_value"
+      ],
+      "row_counts": {
+        "high_value": 3
+      }
+    },
+    {
+      "step_index": 3,
+      "step_id": "b725a1317e2513112563fe4d6126100efe2af4b48464b226060274fd7128f146",
+      "transform_id": "2dee36f0c074111043796a7aa8819b3ee6f00c8652278c76ed7585bb58c2d2e7",
+      "op": "sort",
+      "inputs": [
+        "high_value"
+      ],
+      "outputs": [
+        "sorted_high"
+      ],
+      "row_counts": {
+        "sorted_high": 3
+      }
+    }
+  ]
+}

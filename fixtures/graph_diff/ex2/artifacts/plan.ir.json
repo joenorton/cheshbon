@@ -1,0 +1,139 @@
+{
+  "steps": [
+    {
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_start": 1,
+        "line_end": 6
+      },
+      "op": "compute",
+      "inputs": [
+        "source"
+      ],
+      "outputs": [
+        "high_value__1"
+      ],
+      "params": {
+        "assign": [
+          {
+            "col": "label",
+            "expr": {
+              "type": "lit",
+              "value": "Low"
+            }
+          }
+        ]
+      },
+      "transform_id": "80d192f41ea8c0d5f47b1ce060847a280d39fa76ed895224eec3969b2b4cba2f",
+      "transform_class_id": "7341ee40ccfa48dbe117e66515b46d074b4f29867068d52e61ac7aff7c30ddb6",
+      "step_id": "1ccc13ed7f2ba1d8dcae333ba6a18ed098da944009f7a3e810930a860488601f"
+    },
+    {
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_start": 1,
+        "line_end": 6
+      },
+      "op": "filter",
+      "inputs": [
+        "high_value__1"
+      ],
+      "outputs": [
+        "high_value__2"
+      ],
+      "params": {
+        "predicate": {
+          "type": "binop",
+          "op": ">",
+          "left": {
+            "type": "col",
+            "name": "value"
+          },
+          "right": {
+            "type": "lit",
+            "value": 250
+          }
+        }
+      },
+      "transform_id": "f197962a3c03ef7517a518ff9dff5574903a89916ffeb1006f41686711cfaef8",
+      "transform_class_id": "c42bd6db28cb3e9f31ebef575e6e36dc331c7fc202e46ec09c52fb6fafeeba46",
+      "step_id": "977b7390ce7cf819f15b1aa0823523930b3f85d861a67cef04b126402efb1742"
+    },
+    {
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_start": 1,
+        "line_end": 6
+      },
+      "op": "select",
+      "inputs": [
+        "high_value__2"
+      ],
+      "outputs": [
+        "high_value"
+      ],
+      "params": {
+        "cols": [
+          "name",
+          "value",
+          "label"
+        ]
+      },
+      "transform_id": "def97c2477de8c05d63bc26ad9a37732a92734f3ca1c1a0fbf0155371e320c91",
+      "transform_class_id": "610977b6de303518229b5d7491c16ee9277fb5609b276a81213243598bdecc20",
+      "step_id": "e1bafba763900b9b4669993a01eb85e324483236aa9ffc7beef4cde19466a720"
+    },
+    {
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_start": 8,
+        "line_end": 10
+      },
+      "op": "sort",
+      "inputs": [
+        "high_value"
+      ],
+      "outputs": [
+        "sorted_high"
+      ],
+      "params": {
+        "by": [
+          {
+            "col": "value",
+            "desc": false
+          }
+        ]
+      },
+      "transform_id": "2dee36f0c074111043796a7aa8819b3ee6f00c8652278c76ed7585bb58c2d2e7",
+      "transform_class_id": "86f0ab2aa5543473797e8a1ec4d83b96f21a9db7fdf1ca68f7abc7332a1037cf",
+      "step_id": "b725a1317e2513112563fe4d6126100efe2af4b48464b226060274fd7128f146"
+    }
+  ],
+  "tables": [
+    "source"
+  ],
+  "table_facts": {
+    "source": {
+      "sorted_by": null
+    },
+    "high_value__1": {
+      "sorted_by": null
+    },
+    "high_value__2": {
+      "sorted_by": null
+    },
+    "high_value": {
+      "sorted_by": null
+    },
+    "sorted_high": {
+      "sorted_by": [
+        "value"
+      ]
+    }
+  },
+  "datasources": {}
+}

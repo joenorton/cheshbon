@@ -1,0 +1,22 @@
+{
+  "registry_version": "0.1",
+  "transforms": [
+    {
+      "id": "t:tx1",
+      "version": "0.0",
+      "kind": "external_sas",
+      "signature": {
+        "inputs": [],
+        "output": "unknown"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "external_sas",
+        "ref": "tx1",
+        "digest": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "history": []
+    }
+  ]
+}

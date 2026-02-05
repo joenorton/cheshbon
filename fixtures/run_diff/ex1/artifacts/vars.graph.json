@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "id": "v:t1.a",
+      "table_id": "t1",
+      "col": "a",
+      "origin": "derived",
+      "expr_sha256": "e1",
+      "payload_sha256": "p1",
+      "producing_step_id": "step1",
+      "transform_id": "tx1"
+    }
+  ],
+  "edges": []
+}

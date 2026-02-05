@@ -1,0 +1,35 @@
+{
+  "spec_version": "1.0.0",
+  "study_id": "TEST-001",
+  "source_table": "RAW_DM",
+  "sources": [
+    {
+      "id": "s:SEX",
+      "name": "SEX",
+      "type": "string"
+    }
+  ],
+  "derived": [
+    {
+      "id": "d:SEX",
+      "name": "SEX",
+      "type": "string",
+      "transform_ref": "t:ct_map",
+      "inputs": ["s:SEX"],
+      "params": {
+        "map": {
+          "M": "M",
+          "F": "F",
+          "U": "UNKNOWN"
+        }
+      }
+    },
+    {
+      "id": "d:SEX_CDISC",
+      "name": "SEX_CDISC",
+      "type": "string",
+      "transform_ref": "t:direct_copy",
+      "inputs": ["d:SEX"]
+    }
+  ]
+}

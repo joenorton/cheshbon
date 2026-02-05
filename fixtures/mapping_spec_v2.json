@@ -1,0 +1,74 @@
+{
+  "spec_version": "1.0.0",
+  "study_id": "ABC-101",
+  "source_table": "RAW_DM",
+  "sources": [
+    {
+      "id": "s:SUBJID",
+      "name": "SUBJID",
+      "type": "string"
+    },
+    {
+      "id": "s:BRTHDT",
+      "name": "BRTHDT",
+      "type": "date"
+    },
+    {
+      "id": "s:SEX",
+      "name": "SEX",
+      "type": "string"
+    },
+    {
+      "id": "s:RFSTDTC",
+      "name": "RFSTDTC",
+      "type": "date"
+    },
+    {
+      "id": "s:RFSTDT",
+      "name": "RFSTDT",
+      "type": "date"
+    }
+  ],
+  "derived": [
+    {
+      "id": "d:USUBJID",
+      "name": "USUBJID",
+      "type": "string",
+      "transform_ref": "t:direct_copy",
+      "inputs": ["s:SUBJID"],
+      "notes": "Direct copy of subject identifier"
+    },
+    {
+      "id": "d:AGE",
+      "name": "AGE",
+      "type": "int",
+      "transform_ref": "t:age_calculation",
+      "inputs": ["s:BRTHDT", "s:RFSTDT"],
+      "notes": "Calculate age in years between birth date and reference start date (now uses RFSTDT instead of RFSTDTC)"
+    },
+    {
+      "id": "d:AGEGRP",
+      "name": "AGEGRP",
+      "type": "string",
+      "transform_ref": "t:age_bucket",
+      "inputs": ["d:AGE"],
+      "notes": "Bucket age into groups: <18, 18-65, >65"
+    },
+    {
+      "id": "d:SEX_CDISC",
+      "name": "SEX_CDISC",
+      "type": "string",
+      "transform_ref": "t:ct_map",
+      "inputs": ["s:SEX"],
+      "params": {
+        "map": {
+          "M": "M",
+          "F": "F",
+          "Male": "M",
+          "Female": "F"
+        }
+      },
+      "notes": "Map to CDISC controlled terminology"
+    }
+  ]
+}

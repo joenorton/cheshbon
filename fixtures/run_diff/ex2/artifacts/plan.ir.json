@@ -1,0 +1,20 @@
+{
+  "steps": [
+    {
+      "kind": "op",
+      "op": "compute",
+      "inputs": [
+        "source"
+      ],
+      "outputs": [
+        "t1_alt"
+      ],
+      "params": {},
+      "transform_id": "tx1",
+      "step_id": "step1"
+    }
+  ],
+  "tables": [
+    "source"
+  ]
+}

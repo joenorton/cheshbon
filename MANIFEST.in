@@ -1,0 +1,14 @@
+# Include tests and fixtures in sdist for v1.0 credibility
+recursive-include tests *
+recursive-include docs *
+recursive-include fixtures *
+recursive-include schemas *
+include README.md
+include LICENSE
+include NOTICE
+include TRADEMARK
+include QUICKSTART.md
+include CONTRACT.md
+
+# Exclude archive directory (historical/internal docs not for OSS distribution)
+prune docs/archive

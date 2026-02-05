@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cheshbon All-Details Report",
+  "type": "object",
+  "required": [
+    "report_schema_version",
+    "verifier_contract_version",
+    "canonicalization_policy_id",
+    "inputs",
+    "core_digest",
+    "details"
+  ],
+  "properties": {
+    "report_schema_version": { "type": "string" },
+    "verifier_contract_version": { "type": "string" },
+    "canonicalization_policy_id": { "type": "string" },
+    "inputs": { "type": "object" },
+    "core_digest": { "type": "string" },
+    "details": {
+      "type": "object",
+      "required": ["event_index", "issues_index", "witnesses", "summaries", "caps", "omissions"],
+      "properties": {
+        "event_index": { "type": "array" },
+        "issues_index": { "type": "array" },
+        "witnesses": { "type": "object" },
+        "summaries": { "type": "object" },
+        "caps": { "type": "object" },
+        "omissions": { "type": "array" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

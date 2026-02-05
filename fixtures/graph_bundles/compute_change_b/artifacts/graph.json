@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "producer": {
+    "name": "sans",
+    "version": "0.1.0"
+  },
+  "nodes": [
+    {
+      "id": "s:compute_v2",
+      "kind": "step",
+      "op": "compute",
+      "transform_id": "t:compute",
+      "inputs": [
+        "t:raw"
+      ],
+      "outputs": [
+        "t:mid_v2"
+      ],
+      "payload_sha256": "p_compute",
+      "transform_class_id": "tc:compute"
+    },
+    {
+      "id": "s:filter_v2",
+      "kind": "step",
+      "op": "filter",
+      "transform_id": "t:filter",
+      "inputs": [
+        "t:mid_v2"
+      ],
+      "outputs": [
+        "t:high_value"
+      ],
+      "payload_sha256": "p_filter",
+      "transform_class_id": "tc:filter"
+    },
+    {
+      "id": "t:raw",
+      "kind": "table",
+      "producer": null,
+      "consumers": [
+        "s:compute_v2"
+      ]
+    },
+    {
+      "id": "t:mid_v2",
+      "kind": "table",
+      "producer": "s:compute_v2",
+      "consumers": [
+        "s:filter_v2"
+      ]
+    },
+    {
+      "id": "t:high_value",
+      "kind": "table",
+      "producer": "s:filter_v2",
+      "consumers": []
+    }
+  ],
+  "edges": [
+    {
+      "src": "s:compute_v2",
+      "dst": "t:mid_v2",
+      "kind": "produces"
+    },
+    {
+      "src": "s:filter_v2",
+      "dst": "t:high_value",
+      "kind": "produces"
+    },
+    {
+      "src": "t:raw",
+      "dst": "s:compute_v2",
+      "kind": "consumes"
+    },
+    {
+      "src": "t:mid_v2",
+      "dst": "s:filter_v2",
+      "kind": "consumes"
+    }
+  ]
+}

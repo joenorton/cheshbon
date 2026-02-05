@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "DerivedVariable": {
+      "description": "A derived variable definition.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "transform_ref": {
+          "title": "Transform Ref",
+          "type": "string"
+        },
+        "inputs": {
+          "description": "List of source/derived IDs, e.g., ['s:BRTHDT', 'd:AGE']",
+          "items": {
+            "type": "string"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "params": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Params"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "transform_ref",
+        "inputs"
+      ],
+      "title": "DerivedVariable",
+      "type": "object"
+    },
+    "SourceColumn": {
+      "description": "A source column definition.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "title": "SourceColumn",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A mapping specification.",
+  "properties": {
+    "spec_version": {
+      "title": "Spec Version",
+      "type": "string"
+    },
+    "study_id": {
+      "title": "Study Id",
+      "type": "string"
+    },
+    "source_table": {
+      "title": "Source Table",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceColumn"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "derived": {
+      "items": {
+        "$ref": "#/$defs/DerivedVariable"
+      },
+      "title": "Derived",
+      "type": "array"
+    },
+    "constraints": {
+      "anyOf": [
+        {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Constraints"
+    },
+    "review": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Review"
+    }
+  },
+  "required": [
+    "spec_version",
+    "study_id",
+    "source_table",
+    "sources",
+    "derived"
+  ],
+  "title": "MappingSpec",
+  "type": "object"
+}

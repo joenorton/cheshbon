@@ -1,0 +1,805 @@
+{
+  "table": "RAW_SENTINEL",
+  "columns": [
+    {
+      "name": "COL001",
+      "type": "string"
+    },
+    {
+      "name": "COL002",
+      "type": "string"
+    },
+    {
+      "name": "COL003",
+      "type": "string"
+    },
+    {
+      "name": "COL004",
+      "type": "string"
+    },
+    {
+      "name": "COL005",
+      "type": "string"
+    },
+    {
+      "name": "COL006",
+      "type": "string"
+    },
+    {
+      "name": "COL007",
+      "type": "string"
+    },
+    {
+      "name": "COL008",
+      "type": "string"
+    },
+    {
+      "name": "COL009",
+      "type": "string"
+    },
+    {
+      "name": "COL010",
+      "type": "string"
+    },
+    {
+      "name": "COL011",
+      "type": "string"
+    },
+    {
+      "name": "COL012",
+      "type": "string"
+    },
+    {
+      "name": "COL013",
+      "type": "string"
+    },
+    {
+      "name": "COL014",
+      "type": "string"
+    },
+    {
+      "name": "COL015",
+      "type": "string"
+    },
+    {
+      "name": "COL016",
+      "type": "string"
+    },
+    {
+      "name": "COL017",
+      "type": "string"
+    },
+    {
+      "name": "COL018",
+      "type": "string"
+    },
+    {
+      "name": "COL019",
+      "type": "string"
+    },
+    {
+      "name": "COL020",
+      "type": "string"
+    },
+    {
+      "name": "COL021",
+      "type": "string"
+    },
+    {
+      "name": "COL022",
+      "type": "string"
+    },
+    {
+      "name": "COL023",
+      "type": "string"
+    },
+    {
+      "name": "COL024",
+      "type": "string"
+    },
+    {
+      "name": "COL025",
+      "type": "string"
+    },
+    {
+      "name": "COL026",
+      "type": "string"
+    },
+    {
+      "name": "COL027",
+      "type": "string"
+    },
+    {
+      "name": "COL028",
+      "type": "string"
+    },
+    {
+      "name": "COL029",
+      "type": "string"
+    },
+    {
+      "name": "COL030",
+      "type": "string"
+    },
+    {
+      "name": "COL031",
+      "type": "string"
+    },
+    {
+      "name": "COL032",
+      "type": "string"
+    },
+    {
+      "name": "COL033",
+      "type": "string"
+    },
+    {
+      "name": "COL034",
+      "type": "string"
+    },
+    {
+      "name": "COL035",
+      "type": "string"
+    },
+    {
+      "name": "COL036",
+      "type": "string"
+    },
+    {
+      "name": "COL037",
+      "type": "string"
+    },
+    {
+      "name": "COL038",
+      "type": "string"
+    },
+    {
+      "name": "COL039",
+      "type": "string"
+    },
+    {
+      "name": "COL040",
+      "type": "string"
+    },
+    {
+      "name": "COL041",
+      "type": "string"
+    },
+    {
+      "name": "COL042",
+      "type": "string"
+    },
+    {
+      "name": "COL043",
+      "type": "string"
+    },
+    {
+      "name": "COL044",
+      "type": "string"
+    },
+    {
+      "name": "COL045",
+      "type": "string"
+    },
+    {
+      "name": "COL046",
+      "type": "string"
+    },
+    {
+      "name": "COL047",
+      "type": "string"
+    },
+    {
+      "name": "COL048",
+      "type": "string"
+    },
+    {
+      "name": "COL049",
+      "type": "string"
+    },
+    {
+      "name": "COL050",
+      "type": "string"
+    },
+    {
+      "name": "COL051",
+      "type": "string"
+    },
+    {
+      "name": "COL052",
+      "type": "string"
+    },
+    {
+      "name": "COL053",
+      "type": "string"
+    },
+    {
+      "name": "COL054",
+      "type": "string"
+    },
+    {
+      "name": "COL055",
+      "type": "string"
+    },
+    {
+      "name": "COL056",
+      "type": "string"
+    },
+    {
+      "name": "COL057",
+      "type": "string"
+    },
+    {
+      "name": "COL058",
+      "type": "string"
+    },
+    {
+      "name": "COL059",
+      "type": "string"
+    },
+    {
+      "name": "COL060",
+      "type": "string"
+    },
+    {
+      "name": "COL061",
+      "type": "string"
+    },
+    {
+      "name": "COL062",
+      "type": "string"
+    },
+    {
+      "name": "COL063",
+      "type": "string"
+    },
+    {
+      "name": "COL064",
+      "type": "string"
+    },
+    {
+      "name": "COL065",
+      "type": "string"
+    },
+    {
+      "name": "COL066",
+      "type": "string"
+    },
+    {
+      "name": "COL067",
+      "type": "string"
+    },
+    {
+      "name": "COL068",
+      "type": "string"
+    },
+    {
+      "name": "COL069",
+      "type": "string"
+    },
+    {
+      "name": "COL070",
+      "type": "string"
+    },
+    {
+      "name": "COL071",
+      "type": "string"
+    },
+    {
+      "name": "COL072",
+      "type": "string"
+    },
+    {
+      "name": "COL073",
+      "type": "string"
+    },
+    {
+      "name": "COL074",
+      "type": "string"
+    },
+    {
+      "name": "COL075",
+      "type": "string"
+    },
+    {
+      "name": "COL076",
+      "type": "string"
+    },
+    {
+      "name": "COL077",
+      "type": "string"
+    },
+    {
+      "name": "COL078",
+      "type": "string"
+    },
+    {
+      "name": "COL079",
+      "type": "string"
+    },
+    {
+      "name": "COL080",
+      "type": "string"
+    },
+    {
+      "name": "COL081",
+      "type": "string"
+    },
+    {
+      "name": "COL082",
+      "type": "string"
+    },
+    {
+      "name": "COL083",
+      "type": "string"
+    },
+    {
+      "name": "COL084",
+      "type": "string"
+    },
+    {
+      "name": "COL085",
+      "type": "string"
+    },
+    {
+      "name": "COL086",
+      "type": "string"
+    },
+    {
+      "name": "COL087",
+      "type": "string"
+    },
+    {
+      "name": "COL088",
+      "type": "string"
+    },
+    {
+      "name": "COL089",
+      "type": "string"
+    },
+    {
+      "name": "COL090",
+      "type": "string"
+    },
+    {
+      "name": "COL091",
+      "type": "string"
+    },
+    {
+      "name": "COL092",
+      "type": "string"
+    },
+    {
+      "name": "COL093",
+      "type": "string"
+    },
+    {
+      "name": "COL094",
+      "type": "string"
+    },
+    {
+      "name": "COL095",
+      "type": "string"
+    },
+    {
+      "name": "COL096",
+      "type": "string"
+    },
+    {
+      "name": "COL097",
+      "type": "string"
+    },
+    {
+      "name": "COL098",
+      "type": "string"
+    },
+    {
+      "name": "COL099",
+      "type": "string"
+    },
+    {
+      "name": "COL100",
+      "type": "string"
+    },
+    {
+      "name": "COL101",
+      "type": "string"
+    },
+    {
+      "name": "COL102",
+      "type": "string"
+    },
+    {
+      "name": "COL103",
+      "type": "string"
+    },
+    {
+      "name": "COL104",
+      "type": "string"
+    },
+    {
+      "name": "COL105",
+      "type": "string"
+    },
+    {
+      "name": "COL106",
+      "type": "string"
+    },
+    {
+      "name": "COL107",
+      "type": "string"
+    },
+    {
+      "name": "COL108",
+      "type": "string"
+    },
+    {
+      "name": "COL109",
+      "type": "string"
+    },
+    {
+      "name": "COL110",
+      "type": "string"
+    },
+    {
+      "name": "COL111",
+      "type": "string"
+    },
+    {
+      "name": "COL112",
+      "type": "string"
+    },
+    {
+      "name": "COL113",
+      "type": "string"
+    },
+    {
+      "name": "COL114",
+      "type": "string"
+    },
+    {
+      "name": "COL115",
+      "type": "string"
+    },
+    {
+      "name": "COL116",
+      "type": "string"
+    },
+    {
+      "name": "COL117",
+      "type": "string"
+    },
+    {
+      "name": "COL118",
+      "type": "string"
+    },
+    {
+      "name": "COL119",
+      "type": "string"
+    },
+    {
+      "name": "COL120",
+      "type": "string"
+    },
+    {
+      "name": "COL121",
+      "type": "string"
+    },
+    {
+      "name": "COL122",
+      "type": "string"
+    },
+    {
+      "name": "COL123",
+      "type": "string"
+    },
+    {
+      "name": "COL124",
+      "type": "string"
+    },
+    {
+      "name": "COL125",
+      "type": "string"
+    },
+    {
+      "name": "COL126",
+      "type": "string"
+    },
+    {
+      "name": "COL127",
+      "type": "string"
+    },
+    {
+      "name": "COL128",
+      "type": "string"
+    },
+    {
+      "name": "COL129",
+      "type": "string"
+    },
+    {
+      "name": "COL130",
+      "type": "string"
+    },
+    {
+      "name": "COL131",
+      "type": "string"
+    },
+    {
+      "name": "COL132",
+      "type": "string"
+    },
+    {
+      "name": "COL133",
+      "type": "string"
+    },
+    {
+      "name": "COL134",
+      "type": "string"
+    },
+    {
+      "name": "COL135",
+      "type": "string"
+    },
+    {
+      "name": "COL136",
+      "type": "string"
+    },
+    {
+      "name": "COL137",
+      "type": "string"
+    },
+    {
+      "name": "COL138",
+      "type": "string"
+    },
+    {
+      "name": "COL139",
+      "type": "string"
+    },
+    {
+      "name": "COL140",
+      "type": "string"
+    },
+    {
+      "name": "COL141",
+      "type": "string"
+    },
+    {
+      "name": "COL142",
+      "type": "string"
+    },
+    {
+      "name": "COL143",
+      "type": "string"
+    },
+    {
+      "name": "COL144",
+      "type": "string"
+    },
+    {
+      "name": "COL145",
+      "type": "string"
+    },
+    {
+      "name": "COL146",
+      "type": "string"
+    },
+    {
+      "name": "COL147",
+      "type": "string"
+    },
+    {
+      "name": "COL148",
+      "type": "string"
+    },
+    {
+      "name": "COL149",
+      "type": "string"
+    },
+    {
+      "name": "COL150",
+      "type": "string"
+    },
+    {
+      "name": "COL151",
+      "type": "string"
+    },
+    {
+      "name": "COL152",
+      "type": "string"
+    },
+    {
+      "name": "COL153",
+      "type": "string"
+    },
+    {
+      "name": "COL154",
+      "type": "string"
+    },
+    {
+      "name": "COL155",
+      "type": "string"
+    },
+    {
+      "name": "COL156",
+      "type": "string"
+    },
+    {
+      "name": "COL157",
+      "type": "string"
+    },
+    {
+      "name": "COL158",
+      "type": "string"
+    },
+    {
+      "name": "COL159",
+      "type": "string"
+    },
+    {
+      "name": "COL160",
+      "type": "string"
+    },
+    {
+      "name": "COL161",
+      "type": "string"
+    },
+    {
+      "name": "COL162",
+      "type": "string"
+    },
+    {
+      "name": "COL163",
+      "type": "string"
+    },
+    {
+      "name": "COL164",
+      "type": "string"
+    },
+    {
+      "name": "COL165",
+      "type": "string"
+    },
+    {
+      "name": "COL166",
+      "type": "string"
+    },
+    {
+      "name": "COL167",
+      "type": "string"
+    },
+    {
+      "name": "COL168",
+      "type": "string"
+    },
+    {
+      "name": "COL169",
+      "type": "string"
+    },
+    {
+      "name": "COL170",
+      "type": "string"
+    },
+    {
+      "name": "COL171",
+      "type": "string"
+    },
+    {
+      "name": "COL172",
+      "type": "string"
+    },
+    {
+      "name": "COL173",
+      "type": "string"
+    },
+    {
+      "name": "COL174",
+      "type": "string"
+    },
+    {
+      "name": "COL175",
+      "type": "string"
+    },
+    {
+      "name": "COL176",
+      "type": "string"
+    },
+    {
+      "name": "COL177",
+      "type": "string"
+    },
+    {
+      "name": "COL178",
+      "type": "string"
+    },
+    {
+      "name": "COL179",
+      "type": "string"
+    },
+    {
+      "name": "COL180",
+      "type": "string"
+    },
+    {
+      "name": "COL181",
+      "type": "string"
+    },
+    {
+      "name": "COL182",
+      "type": "string"
+    },
+    {
+      "name": "COL183",
+      "type": "string"
+    },
+    {
+      "name": "COL184",
+      "type": "string"
+    },
+    {
+      "name": "COL185",
+      "type": "string"
+    },
+    {
+      "name": "COL186",
+      "type": "string"
+    },
+    {
+      "name": "COL187",
+      "type": "string"
+    },
+    {
+      "name": "COL188",
+      "type": "string"
+    },
+    {
+      "name": "COL189",
+      "type": "string"
+    },
+    {
+      "name": "COL190",
+      "type": "string"
+    },
+    {
+      "name": "COL191",
+      "type": "string"
+    },
+    {
+      "name": "COL192",
+      "type": "string"
+    },
+    {
+      "name": "COL193",
+      "type": "string"
+    },
+    {
+      "name": "COL194",
+      "type": "string"
+    },
+    {
+      "name": "COL195",
+      "type": "string"
+    },
+    {
+      "name": "COL196",
+      "type": "string"
+    },
+    {
+      "name": "COL197",
+      "type": "string"
+    },
+    {
+      "name": "COL198",
+      "type": "string"
+    },
+    {
+      "name": "COL199",
+      "type": "string"
+    },
+    {
+      "name": "COL200",
+      "type": "string"
+    }
+  ]
+}

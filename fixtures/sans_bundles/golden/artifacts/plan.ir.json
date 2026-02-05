@@ -1,0 +1,135 @@
+{
+  "steps": [
+    {
+      "inputs": [
+        "source"
+      ],
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_end": 6,
+        "line_start": 1
+      },
+      "op": "compute",
+      "outputs": [
+        "high_value__1"
+      ],
+      "params": {
+        "assign": [
+          {
+            "col": "label",
+            "expr": {
+              "type": "lit",
+              "value": "High"
+            }
+          }
+        ]
+      },
+      "step_id": "b9a012e46daa4899e0cbf07b6cf8bad9e0cfde365452f8f39d5df8618e0c9f04",
+      "transform_id": "6d6b78538e68252d3eef58e34ff6d386f908e9a4c1b27c422ffd6a93bbe96219"
+    },
+    {
+      "inputs": [
+        "high_value__1"
+      ],
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_end": 6,
+        "line_start": 1
+      },
+      "op": "filter",
+      "outputs": [
+        "high_value__2"
+      ],
+      "params": {
+        "predicate": {
+          "left": {
+            "name": "value",
+            "type": "col"
+          },
+          "op": ">",
+          "right": {
+            "type": "lit",
+            "value": 250
+          },
+          "type": "binop"
+        }
+      },
+      "step_id": "977b7390ce7cf819f15b1aa0823523930b3f85d861a67cef04b126402efb1742",
+      "transform_id": "f197962a3c03ef7517a518ff9dff5574903a89916ffeb1006f41686711cfaef8"
+    },
+    {
+      "inputs": [
+        "high_value__2"
+      ],
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_end": 6,
+        "line_start": 1
+      },
+      "op": "select",
+      "outputs": [
+        "high_value"
+      ],
+      "params": {
+        "drop": [],
+        "keep": [
+          "name",
+          "value",
+          "label"
+        ]
+      },
+      "step_id": "5f86e219ca66963b3308b825010751578368e6c82a229b6e0ecc4bace0096bc6",
+      "transform_id": "1191a4bccc00ac9ec544d3b849f4158cdc8f8cd58df28d8313597ad983188b61"
+    },
+    {
+      "inputs": [
+        "high_value"
+      ],
+      "kind": "op",
+      "loc": {
+        "file": "analysis.sas",
+        "line_end": 10,
+        "line_start": 8
+      },
+      "op": "sort",
+      "outputs": [
+        "sorted_high"
+      ],
+      "params": {
+        "by": [
+          {
+            "asc": true,
+            "col": "value"
+          }
+        ]
+      },
+      "step_id": "c949cba432c7cb43599db8350e743efd752f86c9344825c2d1b414f2be2e29be",
+      "transform_id": "0451918cac1e494a3273b778e6cdde2f1d91d4eb2e7f068104d882e7ddbd0cb9"
+    }
+  ],
+  "table_facts": {
+    "high_value": {
+      "sorted_by": null
+    },
+    "high_value__1": {
+      "sorted_by": null
+    },
+    "high_value__2": {
+      "sorted_by": null
+    },
+    "sorted_high": {
+      "sorted_by": [
+        "value"
+      ]
+    },
+    "source": {
+      "sorted_by": null
+    }
+  },
+  "tables": [
+    "source"
+  ]
+}

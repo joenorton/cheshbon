@@ -1,0 +1,26 @@
+{
+  "spec_version": "1.0.0",
+  "study_id": "ABC-101",
+  "source_table": "RAW_DM",
+  "sources": [
+    {"id": "s:BRTHDT", "name": "BRTHDT", "type": "date"},
+    {"id": "s:RFSTDTC", "name": "RFSTDTC", "type": "date"}
+  ],
+  "derived": [
+    {
+      "id": "d:AGE",
+      "name": "AGE",
+      "type": "int",
+      "transform_ref": "t:age_calc",
+      "inputs": ["s:BRTHDT", "s:RFSTDTC"]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "c:AGE_GE_0",
+      "name": "AGE_GE_0",
+      "inputs": ["d:AGE"],
+      "expression": "AGE >= 0"
+    }
+  ]
+}

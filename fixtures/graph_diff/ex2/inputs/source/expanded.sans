@@ -1,0 +1,5 @@
+# sans 0.1
+table high_value__1 = source derive()
+table high_value__2 = high_value__1 filter((value > 250))
+table high_value = high_value__2 select name, value, label
+table sorted_high = sort(high_value).by(value)

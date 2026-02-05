@@ -1,0 +1,69 @@
+{
+  "registry_version": "1.0.0",
+  "transforms": [
+    {
+      "id": "t:direct_copy",
+      "version": "1.0.0",
+      "kind": "builtin",
+      "signature": {
+        "inputs": ["any"],
+        "output": "any"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "builtin",
+        "ref": "cheshbon.kernel.transforms.direct_copy",
+        "digest": "abc123def4567890123456789012345678901234567890123456789012345678"
+      }
+    },
+    {
+      "id": "t:age_calculation",
+      "version": "1.0.0",
+      "kind": "builtin",
+      "signature": {
+        "inputs": ["date", "date"],
+        "output": "int"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "builtin",
+        "ref": "cheshbon.kernel.transforms.age_calculation",
+        "digest": "def456abc1237890123456789012345678901234567890123456789012345678"
+      }
+    },
+    {
+      "id": "t:age_bucket",
+      "version": "1.0.0",
+      "kind": "builtin",
+      "signature": {
+        "inputs": ["int"],
+        "output": "string"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "builtin",
+        "ref": "cheshbon.kernel.transforms.age_bucket",
+        "digest": "789012def456abc1234567890123456789012345678901234567890123456789"
+      }
+    },
+    {
+      "id": "t:ct_map",
+      "version": "1.0.0",
+      "kind": "builtin",
+      "signature": {
+        "inputs": ["string"],
+        "output": "string"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "builtin",
+        "ref": "cheshbon.kernel.transforms.ct_map",
+        "digest": "012345789012def456abc1234567890123456789012345678901234567890123"
+      }
+    }
+  ]
+}

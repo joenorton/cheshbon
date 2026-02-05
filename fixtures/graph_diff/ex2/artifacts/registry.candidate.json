@@ -1,0 +1,79 @@
+{
+  "registry_version": "0.1",
+  "transforms": [
+    {
+      "transform_id": "80d192f41ea8c0d5f47b1ce060847a280d39fa76ed895224eec3969b2b4cba2f",
+      "kind": "compute",
+      "spec": {
+        "op": "compute",
+        "params": {
+          "assign": [
+            {
+              "col": "label",
+              "expr": {
+                "type": "lit",
+                "value": "Low"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "transform_id": "f197962a3c03ef7517a518ff9dff5574903a89916ffeb1006f41686711cfaef8",
+      "kind": "filter",
+      "spec": {
+        "op": "filter",
+        "params": {
+          "predicate": {
+            "left": {
+              "name": "value",
+              "type": "col"
+            },
+            "op": ">",
+            "right": {
+              "type": "lit",
+              "value": 250
+            },
+            "type": "binop"
+          }
+        }
+      }
+    },
+    {
+      "transform_id": "def97c2477de8c05d63bc26ad9a37732a92734f3ca1c1a0fbf0155371e320c91",
+      "kind": "select",
+      "spec": {
+        "op": "select",
+        "params": {
+          "cols": [
+            "name",
+            "value",
+            "label"
+          ]
+        }
+      }
+    },
+    {
+      "transform_id": "2dee36f0c074111043796a7aa8819b3ee6f00c8652278c76ed7585bb58c2d2e7",
+      "kind": "sort",
+      "spec": {
+        "op": "sort",
+        "params": {
+          "by": [
+            {
+              "col": "value",
+              "desc": false
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "index": {
+    "0": "80d192f41ea8c0d5f47b1ce060847a280d39fa76ed895224eec3969b2b4cba2f",
+    "1": "f197962a3c03ef7517a518ff9dff5574903a89916ffeb1006f41686711cfaef8",
+    "2": "def97c2477de8c05d63bc26ad9a37732a92734f3ca1c1a0fbf0155371e320c91",
+    "3": "2dee36f0c074111043796a7aa8819b3ee6f00c8652278c76ed7585bb58c2d2e7"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "registry_version": "1.0.0",
+  "transforms": [
+    {
+      "id": "t:direct_copy",
+      "version": "1.0.0",
+      "kind": "builtin",
+      "signature": {
+        "inputs": ["any"],
+        "output": "any"
+      },
+      "params_schema_hash": null,
+      "impl_fingerprint": {
+        "algo": "sha256",
+        "source": "builtin",
+        "ref": "cheshbon.transforms.direct_copy",
+        "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    }
+  ]
+}

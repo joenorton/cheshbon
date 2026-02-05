@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "producer": {
+    "name": "sans",
+    "version": "0.1.0"
+  },
+  "nodes": [
+    {
+      "id": "s:step1",
+      "kind": "step",
+      "op": "extract",
+      "transform_id": "t:extract",
+      "inputs": [
+        "t:raw"
+      ],
+      "outputs": [
+        "t:mid"
+      ],
+      "payload_sha256": "p1",
+      "transform_class_id": "tc:extract"
+    },
+    {
+      "id": "s:step2",
+      "kind": "step",
+      "op": "load",
+      "transform_id": "t:load",
+      "inputs": [
+        "t:mid"
+      ],
+      "outputs": [
+        "t:out"
+      ],
+      "payload_sha256": "p2",
+      "transform_class_id": "tc:load"
+    },
+    {
+      "id": "t:mid",
+      "kind": "table",
+      "producer": "s:step1",
+      "consumers": [
+        "s:step2"
+      ]
+    },
+    {
+      "id": "t:out",
+      "kind": "table",
+      "producer": "s:step2",
+      "consumers": []
+    },
+    {
+      "id": "t:raw",
+      "kind": "table",
+      "producer": null,
+      "consumers": [
+        "s:step1"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "src": "s:step1",
+      "dst": "t:mid",
+      "kind": "produces"
+    },
+    {
+      "src": "s:step2",
+      "dst": "t:out",
+      "kind": "produces"
+    },
+    {
+      "src": "t:mid",
+      "dst": "s:step2",
+      "kind": "consumes"
+    },
+    {
+      "src": "t:raw",
+      "dst": "s:step1",
+      "kind": "consumes"
+    }
+  ]
+}
