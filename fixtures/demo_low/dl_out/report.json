@@ -1,0 +1,118 @@
+{
+  "report_schema_version": "0.3",
+  "status": "ok",
+  "exit_code_bucket": 0,
+  "primary_error": null,
+  "diagnostics": [],
+  "inputs": [
+    {
+      "role": "source",
+      "name": "demo_low.sans",
+      "path": "inputs/source/demo_low.sans",
+      "sha256": "2e11af829258f1d673e80f031c63fdc93d40d1d8e03aac8daf46f22560e2d4c8"
+    },
+    {
+      "role": "expanded",
+      "name": "expanded.sans",
+      "path": "inputs/source/expanded.sans",
+      "sha256": "d125bb7dd2ca3e147b5ee832f4f0f85b89ad69b6b16d084ac46d0cd297e63759"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "plan.ir.json",
+      "path": "artifacts/plan.ir.json",
+      "sha256": "a9c66ce1c43f80445de7e056389074baa03f5736274c5a03d0949a1b5a91df30"
+    },
+    {
+      "name": "graph.json",
+      "path": "artifacts/graph.json",
+      "sha256": "0e6913ba2145188661b623216b2c3e312eb2bfc8e3436d8095c910e7d8c17d79"
+    },
+    {
+      "name": "vars.graph.json",
+      "path": "artifacts/vars.graph.json",
+      "sha256": "4caec0a657f53564f7e429573c94cbd470e3d590010e3fc596ae7d1ce434be13"
+    },
+    {
+      "name": "table.effects.json",
+      "path": "artifacts/table.effects.json",
+      "sha256": "19a2183cb9cbfa7fc863e5314b8f70942f333fcd22f54cd74dea8ba0f72b056e"
+    },
+    {
+      "name": "schema.evidence.json",
+      "path": "artifacts/schema.evidence.json",
+      "sha256": "da299aa54764d2be3a0f6bc66d0b585203388e58d096c5699068414deff4593d"
+    },
+    {
+      "name": "registry.candidate.json",
+      "path": "artifacts/registry.candidate.json",
+      "sha256": "4f887cc6f800d5cd463c3d3bc80a6b360d087c5772b7b1301e992678b88d6f75"
+    },
+    {
+      "name": "runtime.evidence.json",
+      "path": "artifacts/runtime.evidence.json",
+      "sha256": "8272ce33146db89e80d1beb7637bf77e4d01a61a5be310dedb4632ef1e5f494a"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sorted_high",
+      "path": "outputs/sorted_high.csv",
+      "sha256": "b5f896a7a802b5ba48ac40ab4461a3f9bec245eb595f9b3100b80864d2be4f86",
+      "rows": 8,
+      "columns": [
+        "USUBJID",
+        "VISITNUM",
+        "A1C",
+        "label"
+      ]
+    },
+    {
+      "name": "sorted_high",
+      "path": "outputs/sorted_high.csv",
+      "sha256": "b5f896a7a802b5ba48ac40ab4461a3f9bec245eb595f9b3100b80864d2be4f86",
+      "rows": 8,
+      "columns": [
+        "USUBJID",
+        "VISITNUM",
+        "A1C",
+        "label"
+      ]
+    }
+  ],
+  "plan_path": "artifacts/plan.ir.json",
+  "engine": {
+    "name": "sans",
+    "version": "0.1.0"
+  },
+  "settings": {
+    "strict": true,
+    "allow_approx": false,
+    "tolerance": null,
+    "tables": [],
+    "datasources": [
+      "lb"
+    ]
+  },
+  "timing": {
+    "compile_ms": 0,
+    "validate_ms": 0,
+    "execute_ms": 4
+  },
+  "schema_lock_used_path": "C:\\Users\\joeno\\Documents\\GitHub\\sans\\demo\\run_diff_clin_demo\\demo_low.schema.lock.json",
+  "schema_lock_sha256": "65ead3010f0103d8be6692f9754ad8a2db60a6cfb33eefff42edeb817ff63344",
+  "schema_lock_applied_datasources": [
+    "lb"
+  ],
+  "schema_lock_missing_datasources": [],
+  "report_sha256": "1ee1a3a7b30cc8456d6b9b2a2b280519ff07f2f58419672a153663465bb924eb",
+  "schema_lock_auto_discovered": true,
+  "schema_lock_copied_path": "schema.lock.json",
+  "runtime": {
+    "status": "ok",
+    "timing": {
+      "execute_ms": 4
+    }
+  }
+}

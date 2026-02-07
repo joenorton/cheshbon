@@ -7,6 +7,13 @@ from pydantic import BaseModel, Field, ConfigDict, AliasChoices, ValidationError
 
 SUPPORTED_REPORT_SCHEMA_VERSIONS = {"0.2", "0.3"}
 
+# Artifact names resolved via report.artifacts by name (authoritative index)
+ARTIFACT_NAME_RUNTIME_EVIDENCE = "runtime.evidence.json"
+ARTIFACT_NAME_SCHEMA_EVIDENCE = "schema.evidence.json"
+ARTIFACT_NAME_SCHEMA_LOCK = "schema.lock.json"
+ARTIFACT_NAME_REGISTRY_CANDIDATE = "registry.candidate.json"
+ARTIFACT_NAME_PLAN_IR = "plan.ir.json"
+
 
 class SansStep(BaseModel):
     kind: str
@@ -121,6 +128,16 @@ class SansReportOutput(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
 
+class PrimaryError(BaseModel):
+    """Report primary_error: code, message, optional loc."""
+
+    code: str
+    message: str
+    loc: Optional[Dict[str, Any]] = None
+
+    model_config = ConfigDict(extra="ignore")
+
+
 class SansReport(BaseModel):
     report_schema_version: str
     plan_path: Optional[str] = None
@@ -129,6 +146,112 @@ class SansReport(BaseModel):
     outputs: List[SansReportOutput] = Field(default_factory=list)
     run_id: Optional[str] = None
     created_at: Optional[str] = None
+    status: Optional[str] = None
+    primary_error: Optional[PrimaryError] = None
+    schema_lock_sha256: Optional[str] = None
+
+    model_config = ConfigDict(extra="ignore")
+
+
+# --- Schema artifacts (sans v0.1+): explicit shapes ---
+# schema.evidence.json: table -> { column: type }
+SchemaEvidenceTable = Dict[str, str]  # column -> type
+
+
+class SchemaEvidence(BaseModel):
+    """schema.evidence.json: records table -> {column: type} snapshots."""
+
+    tables: Dict[str, SchemaEvidenceTable] = Field(default_factory=dict)
+
+    model_config = ConfigDict(extra="ignore")
+
+    @classmethod
+    def from_raw(cls, data: Dict[str, Any]) -> "SchemaEvidence":
+        # Sans may emit "tables": { "table_id": { "col": "type" } } or root as table->cols
+        tables: Dict[str, Dict[str, str]] = {}
+        if "tables" in data and isinstance(data["tables"], dict):
+            for k, v in data["tables"].items():
+                if isinstance(v, dict):
+                    tables[str(k)] = {str(ck): str(cv) for ck, cv in v.items()}
+            return cls(tables=tables)
+        for k, v in data.items():
+            if k in ("tables",) or not isinstance(v, dict):
+                continue
+            try:
+                tables[str(k)] = {str(ck): str(cv) for ck, cv in v.items()}
+            except (TypeError, ValueError):
+                pass
+        return cls(tables=tables)
+
+
+# schema.lock.json: real shape from sans (see fixtures/demo_high/dh_out)
+# datasources: array of { name, columns: [ {name, type} ] }
+class SchemaLockDatasource(BaseModel):
+    """Per-datasource schema in schema.lock.json (column name -> type)."""
+
+    columns: Dict[str, str] = Field(default_factory=dict)  # column -> type
+
+    model_config = ConfigDict(extra="ignore")
+
+
+class SchemaLock(BaseModel):
+    """schema.lock.json: first-class contract; datasources keyed by name with column: type."""
+
+    datasources: Dict[str, SchemaLockDatasource] = Field(default_factory=dict)
+
+    model_config = ConfigDict(extra="ignore")
+
+    @classmethod
+    def from_raw(cls, data: Dict[str, Any]) -> "SchemaLock":
+        # Real sans format: datasources is a list of { name, columns: [ {name, type} ] }
+        ds_raw = data.get("datasources")
+        datasources: Dict[str, SchemaLockDatasource] = {}
+        if isinstance(ds_raw, list):
+            for item in ds_raw:
+                if not isinstance(item, dict):
+                    continue
+                ds_name = item.get("name")
+                if ds_name is None:
+                    continue
+                cols_list = item.get("columns")
+                if isinstance(cols_list, list):
+                    columns = {
+                        str(c.get("name", "")): str(c.get("type", ""))
+                        for c in cols_list
+                        if isinstance(c, dict) and c.get("name") is not None
+                    }
+                elif isinstance(cols_list, dict):
+                    columns = {str(c): str(t) for c, t in cols_list.items()}
+                else:
+                    columns = {}
+                datasources[str(ds_name)] = SchemaLockDatasource(columns=columns)
+        elif isinstance(ds_raw, dict):
+            for ds_id, ds_val in ds_raw.items():
+                if isinstance(ds_val, dict):
+                    cols = ds_val.get("columns")
+                    if isinstance(cols, dict):
+                        datasources[str(ds_id)] = SchemaLockDatasource(
+                            columns={str(c): str(t) for c, t in cols.items()}
+                        )
+                    elif isinstance(cols, list):
+                        columns = {
+                            str(c.get("name", "")): str(c.get("type", ""))
+                            for c in cols
+                            if isinstance(c, dict) and c.get("name") is not None
+                        }
+                        datasources[str(ds_id)] = SchemaLockDatasource(columns=columns)
+                    else:
+                        datasources[str(ds_id)] = SchemaLockDatasource(columns={})
+        return cls(datasources=datasources)
+
+
+class SchemaArtifacts(BaseModel):
+    """Parsed schema artifacts when present (schema.evidence.json, schema.lock.json)."""
+
+    schema_evidence: Optional[SchemaEvidence] = None
+    schema_lock: Optional[SchemaLock] = None
+    schema_evidence_path: Optional[Path] = None
+    schema_lock_path: Optional[Path] = None
 
     model_config = ConfigDict(extra="ignore")
 
@@ -144,6 +267,7 @@ class SansBundle(BaseModel):
     plan_relpath: str
     registry_relpath: str
     evidence_relpath: Optional[str] = None
+    schema_artifacts: Optional[SchemaArtifacts] = None
 
     model_config = ConfigDict(extra="ignore")
 
@@ -169,6 +293,34 @@ def _find_artifact(report: SansReport, name: str) -> Optional[SansReportArtifact
     return None
 
 
+def _resolve_artifact_path(
+    bundle_dir: Path,
+    report: SansReport,
+    artifact_name: str,
+    fallback_relpaths: Optional[List[str]] = None,
+) -> Optional[Path]:
+    """Resolve artifact path. report.artifacts is authoritative when non-empty."""
+    if report.artifacts:
+        art = _find_artifact(report, artifact_name)
+        if art:
+            return resolve_bundle_path(bundle_dir, art.path)
+        # schema.lock.json: also allow bundle root when not listed in artifacts
+        if artifact_name == ARTIFACT_NAME_SCHEMA_LOCK:
+            root_lock = bundle_dir / "schema.lock.json"
+            if root_lock.exists():
+                return root_lock
+        return None
+    # Fallback only when report.artifacts is absent
+    for rel in fallback_relpaths or []:
+        try:
+            p = resolve_bundle_path(bundle_dir, rel)
+            if p.exists():
+                return p
+        except ValueError:
+            continue
+    return None
+
+
 def load_bundle(bundle_dir: Path) -> SansBundle:
     """Load SANS bundle artifacts from directory."""
     report_path = bundle_dir / "report.json"
@@ -191,41 +343,74 @@ def load_bundle(bundle_dir: Path) -> SansBundle:
     if not plan_path.exists():
         raise FileNotFoundError(f"Missing plan at {plan_relpath} referenced by report.json")
 
-    registry_relpath: Optional[str] = None
-    registry_artifact = _find_artifact(report, "registry.candidate.json")
-    if registry_artifact:
-        registry_relpath = _normalize_report_relpath(registry_artifact.path)
-    else:
-        fallback = _normalize_report_relpath("artifacts/registry.candidate.json")
-        if resolve_bundle_path(bundle_dir, fallback).exists():
-            registry_relpath = fallback
+    registry_path = _resolve_artifact_path(
+        bundle_dir,
+        report,
+        ARTIFACT_NAME_REGISTRY_CANDIDATE,
+        fallback_relpaths=["artifacts/registry.candidate.json"],
+    )
+    if not registry_path or not registry_path.exists():
+        raise FileNotFoundError(
+            "Missing registry.candidate.json (not in report.artifacts or fallback)"
+        )
+    try:
+        registry_relpath = _normalize_report_relpath(
+            str(registry_path.relative_to(bundle_dir))
+        )
+    except ValueError:
+        registry_relpath = _normalize_report_relpath(registry_path.name)
 
-    if not registry_relpath:
-        raise FileNotFoundError("Missing registry.candidate.json (not listed in report.json artifacts)")
-
-    registry_path = resolve_bundle_path(bundle_dir, registry_relpath)
-    if not registry_path.exists():
-        raise FileNotFoundError(f"Missing registry at {registry_relpath} referenced by report.json")
-
+    evidence_path = _resolve_artifact_path(
+        bundle_dir,
+        report,
+        ARTIFACT_NAME_RUNTIME_EVIDENCE,
+        fallback_relpaths=["artifacts/runtime.evidence.json"],
+    )
     evidence_relpath: Optional[str] = None
-    evidence_artifact = _find_artifact(report, "runtime.evidence.json")
-    if evidence_artifact:
-        evidence_relpath = _normalize_report_relpath(evidence_artifact.path)
-    else:
-        fallback = _normalize_report_relpath("artifacts/runtime.evidence.json")
-        if resolve_bundle_path(bundle_dir, fallback).exists():
-            evidence_relpath = fallback
-
-    evidence_path: Optional[Path] = None
     evidence: Optional[SansEvidence] = None
-    if evidence_relpath:
-        evidence_path = resolve_bundle_path(bundle_dir, evidence_relpath)
-        if evidence_path.exists():
+    if evidence_path and evidence_path.exists():
+        try:
+            evidence_relpath = _normalize_report_relpath(
+                str(evidence_path.relative_to(bundle_dir))
+            )
+        except ValueError:
+            evidence_relpath = _normalize_report_relpath(evidence_path.name)
+        try:
             evidence_data = json.loads(evidence_path.read_text(encoding="utf-8"))
-            try:
-                evidence = SansEvidence(**evidence_data)
-            except ValidationError:
-                evidence = None
+            evidence = SansEvidence(**evidence_data)
+        except (ValidationError, json.JSONDecodeError):
+            evidence = None
+
+    schema_evidence_path = _resolve_artifact_path(
+        bundle_dir, report, ARTIFACT_NAME_SCHEMA_EVIDENCE
+    )
+    schema_lock_path = _resolve_artifact_path(
+        bundle_dir, report, ARTIFACT_NAME_SCHEMA_LOCK
+    )
+    schema_artifacts: Optional[SchemaArtifacts] = None
+    schema_evidence: Optional[SchemaEvidence] = None
+    schema_lock: Optional[SchemaLock] = None
+    if schema_evidence_path and schema_evidence_path.exists():
+        try:
+            schema_evidence = SchemaEvidence.from_raw(
+                json.loads(schema_evidence_path.read_text(encoding="utf-8"))
+            )
+        except (json.JSONDecodeError, TypeError, ValueError):
+            schema_evidence = None
+    if schema_lock_path and schema_lock_path.exists():
+        try:
+            schema_lock = SchemaLock.from_raw(
+                json.loads(schema_lock_path.read_text(encoding="utf-8"))
+            )
+        except (json.JSONDecodeError, TypeError, ValueError):
+            schema_lock = None
+    if schema_evidence is not None or schema_lock is not None:
+        schema_artifacts = SchemaArtifacts(
+            schema_evidence=schema_evidence,
+            schema_lock=schema_lock,
+            schema_evidence_path=schema_evidence_path if schema_evidence_path else None,
+            schema_lock_path=schema_lock_path if schema_lock_path else None,
+        )
 
     plan_data = json.loads(plan_path.read_text(encoding="utf-8"))
     registry_data = json.loads(registry_path.read_text(encoding="utf-8"))
@@ -240,5 +425,6 @@ def load_bundle(bundle_dir: Path) -> SansBundle:
         evidence_path=evidence_path,
         plan_relpath=plan_relpath,
         registry_relpath=registry_relpath,
-        evidence_relpath=evidence_relpath
+        evidence_relpath=evidence_relpath,
+        schema_artifacts=schema_artifacts,
     )

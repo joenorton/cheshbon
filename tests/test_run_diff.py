@@ -870,3 +870,57 @@ def test_run_diff_value_evidence_outputs_fallback(tmp_path: Path):
     assert evidence["available"] is True
     assert evidence["kind"] == "column_constant"
     assert evidence["summary"] == "\"HIGH\" -> \"LOW\""
+
+
+def test_run_diff_demo_high_schema_sections():
+    """Run-diff with reference bundle fixtures/demo_high (see fixtures/demo_high): schema_lock and schema_changes sections present."""
+    bundle_dir = Path(__file__).resolve().parent.parent / "fixtures" / "demo_high" / "dh_out"
+    if not bundle_dir.exists():
+        import pytest
+        pytest.skip("fixtures/demo_high/dh_out not found")
+    _md, json_content = run_diff_from_bundles(bundle_dir, bundle_dir)
+    report = json.loads(json_content)
+    assert "schema_lock" in report
+    assert report["schema_lock"]["lock_used_a"] is True
+    assert report["schema_lock"]["lock_used_b"] is True
+    assert report["schema_lock"].get("contract_changed") is False
+    assert "lock_hash_a" in report["schema_lock"]
+    assert "lock_hash_b" in report["schema_lock"]
+
+
+def test_run_diff_refused_bundle_surfaces_refusal_and_skips_diffs(tmp_path: Path):
+    """When report.status is refused, output surfaces refusal and skips kernel/value diffs."""
+    report_refused_a = {
+        "plan_path": "artifacts/plan.ir.json",
+        "report_schema_version": "0.3",
+        "status": "refused",
+        "primary_error": {
+            "code": "E_SCHEMA_REQUIRED",
+            "message": "Schema lock required",
+            "loc": None,
+        },
+        "artifacts": [],
+    }
+    report_ok_b = {
+        "plan_path": "artifacts/plan.ir.json",
+        "report_schema_version": "0.3",
+        "status": "ok",
+        "primary_error": None,
+        "artifacts": [{"name": "plan.ir.json", "path": "artifacts/plan.ir.json", "sha256": "0" * 64}, {"name": "vars.graph.json", "path": "artifacts/vars.graph.json", "sha256": "0" * 64}, {"name": "registry.candidate.json", "path": "artifacts/registry.candidate.json", "sha256": "0" * 64}],
+    }
+    plan = {"steps": [], "tables": ["source"]}
+    vars_graph = {"nodes": [], "edges": []}
+    registry = {"registry_version": "0.1", "index": {}, "transforms": []}
+    (tmp_path / "a" / "artifacts").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "a" / "report.json").write_text(json.dumps(report_refused_a), encoding="utf-8")
+    (tmp_path / "b" / "artifacts").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "b" / "report.json").write_text(json.dumps(report_ok_b), encoding="utf-8")
+    (tmp_path / "b" / "artifacts" / "plan.ir.json").write_text(json.dumps(plan), encoding="utf-8")
+    (tmp_path / "b" / "artifacts" / "vars.graph.json").write_text(json.dumps(vars_graph), encoding="utf-8")
+    (tmp_path / "b" / "artifacts" / "registry.candidate.json").write_text(json.dumps(registry), encoding="utf-8")
+    _md, json_content = run_diff_from_bundles(tmp_path / "a", tmp_path / "b")
+    report = json.loads(json_content)
+    assert "refusal_info" in report
+    assert "a" in report["refusal_info"]
+    assert report["refusal_info"]["a"]["code"] == "E_SCHEMA_REQUIRED"
+    assert report["impacted"] == []

@@ -22,9 +22,13 @@ def compute_value_evidence(
     bundle_b: Path,
     impacted_var_ids: Iterable[str],
     change_events: Iterable[Any],
+    schema_evidence_a: Optional[Any] = None,
+    schema_evidence_b: Optional[Any] = None,
 ) -> Dict[str, Dict[str, Any]]:
     """Compute value-level evidence for DIRECT_CHANGE vars only.
 
+    When schema_evidence_b is present and the column is not in the target table schema,
+    reports "column no longer exists" instead of value changed.
     Returns a dict: var_id -> value_evidence object.
     """
     direct_var_ids = _direct_change_var_ids(change_events)
@@ -52,16 +56,22 @@ def compute_value_evidence(
         table_a, col_a = _resolve_table_col(node_lookup_a, var_id)
         table_b, col_b = _resolve_table_col(node_lookup_b, var_id)
         if not table_a or not col_a or not table_b or not col_b:
-            value_evidence[var_id] = _unavailable_value_evidence()
-            continue
-
-        if not table_a or not col_a or not table_b or not col_b:
-            failure_reason = "table_not_found" if not (table_a and table_b) else "column_not_found"
             value_evidence[var_id] = _unavailable_value_evidence(
-                failure_reason=failure_reason,
+                failure_reason="table_not_found" if not (table_a and table_b) else "column_not_found",
                 attempted=["tables", "outputs"],
             )
             continue
+
+        # Schema evidence authoritative: if column not present in B, report "column no longer exists"
+        if schema_evidence_b is not None and hasattr(schema_evidence_b, "tables"):
+            tables_b = getattr(schema_evidence_b, "tables", {}) or {}
+            cols_b = tables_b.get(table_b) if isinstance(tables_b, dict) else None
+            if isinstance(cols_b, dict) and col_b not in cols_b:
+                value_evidence[var_id] = _unavailable_value_evidence(
+                    failure_reason="column_no_longer_exists",
+                    attempted=["schema_evidence"],
+                )
+                continue
 
         stats_a, failure_a, attempted_a = _get_column_stats(evidence_a, table_a, col_a)
         stats_b, failure_b, attempted_b = _get_column_stats(evidence_b, table_b, col_b)

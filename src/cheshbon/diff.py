@@ -42,7 +42,12 @@ def generate_markdown_report(
     edge_kinds: Optional[Dict[tuple[str, str], str]] = None,
     value_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
     registry_v1: Optional[TransformRegistry] = None,
-    registry_v2: Optional[TransformRegistry] = None
+    registry_v2: Optional[TransformRegistry] = None,
+    refusal_info: Optional[Dict[str, Any]] = None,
+    schema_lock_section: Optional[Dict[str, Any]] = None,
+    schema_changes_section: Optional[Dict[str, Any]] = None,
+    schema_changes_lines: Optional[List[str]] = None,
+    contract_changed: bool = False,
 ) -> str:
     """Generate markdown impact report."""
     lines = []
@@ -52,6 +57,67 @@ def generate_markdown_report(
     lines.append("")
     lines.append(f"Generated: {datetime.now(timezone.utc).isoformat()}")
     lines.append("")
+    
+    # Refusal (run-diff: bundle refused -> run did not execute)
+    if refusal_info:
+        lines.append("## [!] Bundle Refused")
+        lines.append("")
+        for key in ("a", "b"):
+            part = refusal_info.get(key)
+            if isinstance(part, dict):
+                code = part.get("code", "")
+                message = part.get("message", "")
+                loc = part.get("loc")
+                lines.append(f"- **Bundle {key.upper()}**: `{code}` — {message}")
+                if loc:
+                    lines.append(f"  - loc: {loc}")
+        lines.append("")
+        lines.append("Kernel and value diffs skipped (run did not execute).")
+        lines.append("")
+    
+    # Schema lock section (run-diff)
+    if schema_lock_section:
+        lines.append("## Schema Lock")
+        lines.append("")
+        lines.append(f"- Lock used (A): {schema_lock_section.get('lock_used_a', False)}")
+        lines.append(f"- Lock used (B): {schema_lock_section.get('lock_used_b', False)}")
+        if schema_lock_section.get("lock_hash_a") is not None:
+            lines.append(f"- Schema contract hash A: `{schema_lock_section['lock_hash_a']}`")
+        if schema_lock_section.get("lock_hash_b") is not None:
+            lines.append(f"- Schema contract hash B: `{schema_lock_section['lock_hash_b']}`")
+        lines.append(f"- Contract changed: {schema_lock_section.get('contract_changed', False)}")
+        if schema_lock_section.get("provenance_changed"):
+            lines.append("- Provenance changed (e.g. created_by); contract unchanged.")
+        if schema_lock_section.get("datasources_changed"):
+            lines.append(f"- Datasources changed: {', '.join(schema_lock_section['datasources_changed'])}")
+        lines.append("")
+    
+    # Schema changes (evidence diff)
+    if schema_changes_lines:
+        lines.append("## Schema Changes (evidence)")
+        lines.append("")
+        for line in schema_changes_lines:
+            lines.append(f"- {line}")
+        lines.append("")
+    elif schema_changes_section and schema_changes_section.get("per_table"):
+        lines.append("## Schema Changes (evidence)")
+        lines.append("")
+        for t in schema_changes_section["per_table"]:
+            parts = []
+            if t.get("columns_added"):
+                parts.append("+" + ",".join(t["columns_added"]))
+            if t.get("columns_removed"):
+                parts.append("-" + ",".join(t["columns_removed"]))
+            for c in t.get("types_changed", []):
+                parts.append(f"{c.get('column', '')} {c.get('old_type', '')}->{c.get('new_type', '')}")
+            lines.append(f"- {t.get('table', '')}: " + " ".join(parts))
+        lines.append("")
+    
+    if contract_changed:
+        lines.append("## Contract Changed")
+        lines.append("")
+        lines.append("Schema lock hash differs; downstream diffs may reflect contract change.")
+        lines.append("")
     
     # Run status
     if impact_result.validation_failed:
@@ -307,6 +373,10 @@ def generate_json_report(
     edge_kinds: Optional[Dict[tuple[str, str], str]] = None,
     validation_findings: Optional[Dict[str, List[Dict[str, str]]]] = None,
     value_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
+    refusal_info: Optional[Dict[str, Any]] = None,
+    schema_lock_section: Optional[Dict[str, Any]] = None,
+    schema_changes_section: Optional[Dict[str, Any]] = None,
+    contract_changed: bool = False,
 ) -> Dict:
     """Generate JSON impact report."""
     # Convert sets to lists for JSON serialization
@@ -355,6 +425,14 @@ def generate_json_report(
     }
     if validation_findings is not None:
         report["validation_findings"] = validation_findings
+    if refusal_info is not None:
+        report["refusal_info"] = refusal_info
+    if schema_lock_section is not None:
+        report["schema_lock"] = schema_lock_section
+    if schema_changes_section is not None:
+        report["schema_changes"] = schema_changes_section
+    if contract_changed:
+        report["contract_changed"] = True
     return report
 
 

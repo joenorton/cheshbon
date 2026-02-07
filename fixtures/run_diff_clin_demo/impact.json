@@ -1,0 +1,205 @@
+{
+  "run_status": "impacted",
+  "validation_failed": false,
+  "validation_errors": [],
+  "summary": {
+    "total_events": 3,
+    "spec_events": 1,
+    "registry_events": 2,
+    "impacted_count": 2,
+    "unaffected_count": 39,
+    "missing_bindings_count": 0,
+    "missing_transforms_count": 0
+  },
+  "change_events": [
+    {
+      "change_type": "TRANSFORM_REMOVED",
+      "element_id": "t:1296e8a6f545713327120baf647835174f864f46ffe0d8676240661a66e74112",
+      "old_value": null,
+      "new_value": null,
+      "details": {
+        "op": "compute",
+        "kind": "compute",
+        "render": "compute label = \"HIGH\" (derive)",
+        "structured": {
+          "mode": "derive",
+          "assignments": [
+            {
+              "target": "label",
+              "expr": "\"HIGH\""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "change_type": "TRANSFORM_ADDED",
+      "element_id": "t:fbd20e998b400b8fac9b2d770aa99f35b480890e5023f0b16cf5bba40fdd0e1d",
+      "old_value": null,
+      "new_value": null,
+      "details": {
+        "op": "compute",
+        "kind": "compute",
+        "render": "compute label = \"LOW\" (derive)",
+        "structured": {
+          "mode": "derive",
+          "assignments": [
+            {
+              "target": "label",
+              "expr": "\"LOW\""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "change_type": "DERIVED_TRANSFORM_REF_CHANGED",
+      "element_id": "v:__t6__.label",
+      "old_value": "t:1296e8a6f545713327120baf647835174f864f46ffe0d8676240661a66e74112",
+      "new_value": "t:fbd20e998b400b8fac9b2d770aa99f35b480890e5023f0b16cf5bba40fdd0e1d",
+      "details": {
+        "target": "label",
+        "mode": "derive",
+        "old_render": "label = \"HIGH\"",
+        "new_render": "label = \"LOW\"",
+        "old_transform_id": "t:1296e8a6f545713327120baf647835174f864f46ffe0d8676240661a66e74112",
+        "new_transform_id": "t:fbd20e998b400b8fac9b2d770aa99f35b480890e5023f0b16cf5bba40fdd0e1d",
+        "old_transform": {
+          "op": "compute",
+          "kind": "compute",
+          "render": "compute label = \"HIGH\" (derive)",
+          "structured": {
+            "mode": "derive",
+            "assignments": [
+              {
+                "target": "label",
+                "expr": "\"HIGH\""
+              }
+            ]
+          }
+        },
+        "new_transform": {
+          "op": "compute",
+          "kind": "compute",
+          "render": "compute label = \"LOW\" (derive)",
+          "structured": {
+            "mode": "derive",
+            "assignments": [
+              {
+                "target": "label",
+                "expr": "\"LOW\""
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "impacted": [
+    "v:__t6__.label",
+    "v:sorted_high.label"
+  ],
+  "unaffected": [
+    "v:__datasource__lb.LBDTC",
+    "v:__datasource__lb.LBORRES",
+    "v:__datasource__lb.LBSTRESN",
+    "v:__datasource__lb.LBSTRESU",
+    "v:__datasource__lb.LBTESTCD",
+    "v:__datasource__lb.USUBJID",
+    "v:__datasource__lb.VISITNUM",
+    "v:__t2__.LBDTC",
+    "v:__t2__.LBORRES",
+    "v:__t2__.LBSTRESN",
+    "v:__t2__.LBSTRESU",
+    "v:__t2__.LBTESTCD",
+    "v:__t2__.USUBJID",
+    "v:__t2__.VISITNUM",
+    "v:__t3__.LBDTC",
+    "v:__t3__.LBORRES",
+    "v:__t3__.LBSTRESN",
+    "v:__t3__.LBSTRESU",
+    "v:__t3__.LBTESTCD",
+    "v:__t3__.USUBJID",
+    "v:__t3__.VISITNUM",
+    "v:__t4__.A1C",
+    "v:__t4__.LBDTC",
+    "v:__t4__.LBORRES",
+    "v:__t4__.LBSTRESU",
+    "v:__t4__.LBTESTCD",
+    "v:__t4__.USUBJID",
+    "v:__t4__.VISITNUM",
+    "v:__t5__.A1C",
+    "v:__t5__.LBDTC",
+    "v:__t5__.USUBJID",
+    "v:__t5__.VISITNUM",
+    "v:__t6__.A1C",
+    "v:__t6__.LBDTC",
+    "v:__t6__.USUBJID",
+    "v:__t6__.VISITNUM",
+    "v:sorted_high.A1C",
+    "v:sorted_high.USUBJID",
+    "v:sorted_high.VISITNUM"
+  ],
+  "impact_details": {
+    "v:__t6__.label": {
+      "reason": "DIRECT_CHANGE",
+      "path": [],
+      "missing_inputs": [],
+      "missing_bindings": [],
+      "missing_transforms": [],
+      "value_evidence": {
+        "available": true,
+        "kind": "column_constant",
+        "summary": "\"HIGH\" -> \"LOW\"",
+        "old": {
+          "unique_count": 1,
+          "null_count": 0,
+          "top_values": [
+            "{'value': 'HIGH', 'count': 8}"
+          ],
+          "constant_value": "HIGH",
+          "constant": "HIGH"
+        },
+        "new": {
+          "unique_count": 1,
+          "null_count": 0,
+          "top_values": [
+            "{'value': 'LOW', 'count': 8}"
+          ],
+          "constant_value": "LOW",
+          "constant": "LOW"
+        }
+      }
+    },
+    "v:sorted_high.label": {
+      "reason": "TRANSITIVE_DEPENDENCY",
+      "path": [
+        {
+          "src": "v:__t6__.label",
+          "dst": "v:sorted_high.label",
+          "kind": "flow"
+        }
+      ],
+      "missing_inputs": [],
+      "missing_bindings": [],
+      "missing_transforms": []
+    }
+  },
+  "validation_findings": {
+    "a": [],
+    "b": []
+  },
+  "schema_lock": {
+    "lock_used_a": true,
+    "lock_used_b": true,
+    "contract_changed": false,
+    "schema_contract_sha256_a": "168b0abf79dad1e84101a5f7b8efce5ab7cd80f083171f918709e30ea59c24a8",
+    "lock_hash_a": "168b0abf79dad1e84101a5f7b8efce5ab7cd80f083171f918709e30ea59c24a8",
+    "schema_contract_sha256_b": "168b0abf79dad1e84101a5f7b8efce5ab7cd80f083171f918709e30ea59c24a8",
+    "lock_hash_b": "168b0abf79dad1e84101a5f7b8efce5ab7cd80f083171f918709e30ea59c24a8",
+    "provenance_changed": true,
+    "lock_provenance_sha256_a": "50ab53b7badc396cc2df5259d19a115927e50c6e4967a9eda42a52d40661a984",
+    "lock_provenance_sha256_b": "65ead3010f0103d8be6692f9754ad8a2db60a6cfb33eefff42edeb817ff63344"
+  },
+  "schema_changes": {}
+}

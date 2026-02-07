@@ -253,6 +253,9 @@ def render_transform(entry: Dict[str, Any]) -> RenderedTransform:
     if op == "aggregate":
         render, structured = _render_aggregate_transform(params)
         return RenderedTransform(op=op, kind=str(kind), render=render, structured=structured)
+    if op == "drop":
+        render, structured = _render_drop_transform(params)
+        return RenderedTransform(op=op, kind=str(kind), render=render, structured=structured)
 
     return RenderedTransform(
         op=str(op),
@@ -338,12 +341,32 @@ def _render_rename_transform(params: Dict[str, Any]) -> Tuple[str, Optional[Dict
 
 def _render_select_transform(params: Dict[str, Any]) -> Tuple[str, Optional[Dict[str, Any]]]:
     cols = params.get("cols") or params.get("keep")
+    drop_cols = params.get("drop")
+    if isinstance(cols, list) and cols:
+        col_list = [str(col) for col in cols if col is not None]
+        if col_list:
+            return f"select {', '.join(col_list)}", {"cols": col_list}
+    if isinstance(drop_cols, list) and drop_cols:
+        drop_list = [str(c) for c in drop_cols if c is not None]
+        if drop_list:
+            return f"select drop({', '.join(drop_list)})", {"drop": drop_list}
     if not isinstance(cols, list) or not cols:
         return "(incomplete spec: cols)", None
     col_list = [str(col) for col in cols if col is not None]
     if not col_list:
         return "(incomplete spec: cols)", None
     return f"select {', '.join(col_list)}", {"cols": col_list}
+
+
+def _render_drop_transform(params: Dict[str, Any]) -> Tuple[str, Optional[Dict[str, Any]]]:
+    """Projection-removal: drop columns (op=drop)."""
+    cols = params.get("drop") or params.get("columns") or params.get("cols")
+    if not isinstance(cols, list) or not cols:
+        return "(incomplete spec: drop)", None
+    col_list = [str(c) for c in cols if c is not None]
+    if not col_list:
+        return "(incomplete spec: drop)", None
+    return f"drop({', '.join(col_list)})", {"drop": col_list}
 
 
 def _render_sort_transform(params: Dict[str, Any]) -> Tuple[str, Optional[Dict[str, Any]]]:

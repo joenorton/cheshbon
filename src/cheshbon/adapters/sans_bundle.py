@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from cheshbon.kernel.bindings import Bindings
+from cheshbon.kernel.impact import ImpactResult
 from cheshbon.kernel.spec import DerivedVariable, MappingSpec
 from cheshbon.kernel.transform_registry import (
     ImplFingerprint,
@@ -32,13 +33,133 @@ class KernelInputs:
     vars_graph: Dict[str, Any]
 
 
+def _load_report(bundle_dir: Path) -> Optional[Any]:
+    """Load and parse report.json as SansReport (optional status/primary_error)."""
+    from cheshbon._internal.io.sans_bundle import SansReport
+
+    report_path = Path(bundle_dir) / "report.json"
+    if not report_path.exists():
+        return None
+    try:
+        data = json.loads(report_path.read_text(encoding="utf-8"))
+        return SansReport(**data)
+    except Exception:
+        return None
+
+
+def _build_refusal_info(report_a: Any, report_b: Any) -> Optional[Dict[str, Any]]:
+    if not report_a and not report_b:
+        return None
+    out: Dict[str, Any] = {}
+    if report_a and getattr(report_a, "status", None) == "refused" and getattr(report_a, "primary_error", None):
+        pe = report_a.primary_error
+        out["a"] = {"code": pe.code, "message": pe.message, "loc": pe.loc}
+    if report_b and getattr(report_b, "status", None) == "refused" and getattr(report_b, "primary_error", None):
+        pe = report_b.primary_error
+        out["b"] = {"code": pe.code, "message": pe.message, "loc": pe.loc}
+    return out if out else None
+
+
+def _build_schema_sections(
+    bundle_a: Path,
+    bundle_b: Path,
+    report_a: Any,
+    report_b: Any,
+) -> Tuple[Dict[str, Any], Dict[str, Any], List[str], bool, Any, Any]:
+    """Load schema lock/evidence, diff; return (lock_section, changes_section, changes_lines, contract_changed, evidence_a, evidence_b)."""
+    from cheshbon.run_diff.schema_evidence_diff import (
+        diff_schema_evidence,
+        format_schema_evidence_diff_compact,
+        load_schema_evidence,
+        schema_evidence_section_for_report,
+    )
+    from cheshbon.run_diff.schema_lock_diff import (
+        diff_schema_locks,
+        load_schema_lock_and_raw,
+        schema_lock_section_for_report,
+    )
+
+    lock_a, raw_a = load_schema_lock_and_raw(Path(bundle_a), report_a) if report_a else (None, None)
+    lock_b, raw_b = load_schema_lock_and_raw(Path(bundle_b), report_b) if report_b else (None, None)
+    evidence_a = load_schema_evidence(Path(bundle_a), report_a) if report_a else None
+    evidence_b = load_schema_evidence(Path(bundle_b), report_b) if report_b else None
+
+    lock_diff = diff_schema_locks(lock_a, lock_b, report_a, report_b, raw_a=raw_a, raw_b=raw_b)
+    evidence_diff = diff_schema_evidence(evidence_a, evidence_b)
+
+    lock_section = schema_lock_section_for_report(lock_diff)
+    changes_section = schema_evidence_section_for_report(evidence_diff)
+    changes_lines = format_schema_evidence_diff_compact(evidence_diff)
+    return lock_section, changes_section, changes_lines, lock_diff.contract_changed, evidence_a, evidence_b
+
+
 def run_diff_from_bundles(bundle_a: Path, bundle_b: Path) -> Tuple[str, str]:
-    """Adapt two SANS bundles and run the kernel diff pipeline."""
+    """Adapt two SANS bundles and run the kernel diff pipeline. Refusal check first, then schema sections, then diffs."""
+    bundle_a = Path(bundle_a)
+    bundle_b = Path(bundle_b)
+
+    from cheshbon.diff import generate_json_report, generate_markdown_report, _diff_result_to_impact_result
+
+    report_a = _load_report(bundle_a)
+    report_b = _load_report(bundle_b)
+    refusal_info = _build_refusal_info(report_a, report_b)
+    (
+        schema_lock_section,
+        schema_changes_section,
+        schema_changes_lines,
+        contract_changed,
+        schema_evidence_a,
+        schema_evidence_b,
+    ) = _build_schema_sections(bundle_a, bundle_b, report_a, report_b)
+
+    if refusal_info:
+        # Bundle refused: surface refusal and schema sections; skip kernel/value diffs
+        impact_result = ImpactResult(
+            impacted=set(),
+            unaffected=set(),
+            impact_paths={},
+            impact_reasons={},
+            unresolved_references={},
+            missing_bindings={},
+            missing_transform_refs={},
+        )
+        empty_spec = MappingSpec(
+            spec_version="sans.vars_graph.v1",
+            study_id="run_diff",
+            source_table="unknown",
+            sources=[],
+            derived=[],
+            constraints=[],
+        )
+        md_content = generate_markdown_report(
+            impact_result=impact_result,
+            change_events=[],
+            spec_v1=empty_spec,
+            spec_v2=empty_spec,
+            refusal_info=refusal_info,
+            schema_lock_section=schema_lock_section,
+            schema_changes_section=schema_changes_section,
+            schema_changes_lines=schema_changes_lines,
+            contract_changed=contract_changed,
+        )
+        json_content = json.dumps(
+            generate_json_report(
+                impact_result,
+                [],
+                refusal_info=refusal_info,
+                schema_lock_section=schema_lock_section,
+                schema_changes_section=schema_changes_section,
+                contract_changed=contract_changed,
+            ),
+            indent=2,
+            ensure_ascii=False,
+        )
+        return md_content, json_content
+
     inputs_a = adapt_bundle_to_kernel(bundle_a)
     inputs_b = adapt_bundle_to_kernel(bundle_b)
 
     from cheshbon import api as kernel_api
-    from cheshbon.diff import generate_json_report, generate_markdown_report, _diff_result_to_impact_result
     from cheshbon.run_diff.value_evidence import compute_value_evidence
     from cheshbon.run_diff.transform_render import annotate_transform_events
 
@@ -72,7 +193,7 @@ def run_diff_from_bundles(bundle_a: Path, bundle_b: Path) -> Tuple[str, str]:
         detail_level="full",
     )
 
-    annotate_transform_events(change_events, bundle_a=Path(bundle_a), bundle_b=Path(bundle_b))
+    annotate_transform_events(change_events, bundle_a=bundle_a, bundle_b=bundle_b)
 
     impact_result = _diff_result_to_impact_result(diff_result)
     edge_kinds = _edge_kind_lookup(inputs_a.vars_graph)
@@ -87,6 +208,8 @@ def run_diff_from_bundles(bundle_a: Path, bundle_b: Path) -> Tuple[str, str]:
         bundle_b=bundle_b,
         impacted_var_ids=diff_result.impacted_ids,
         change_events=change_events,
+        schema_evidence_a=schema_evidence_a,
+        schema_evidence_b=schema_evidence_b,
     )
 
     md_content = generate_markdown_report(
@@ -96,6 +219,10 @@ def run_diff_from_bundles(bundle_a: Path, bundle_b: Path) -> Tuple[str, str]:
         spec_v2=spec_v2,
         edge_kinds=edge_kinds,
         value_evidence=value_evidence,
+        schema_lock_section=schema_lock_section,
+        schema_changes_section=schema_changes_section,
+        schema_changes_lines=schema_changes_lines,
+        contract_changed=contract_changed,
     )
     json_content = json.dumps(
         generate_json_report(
@@ -104,6 +231,9 @@ def run_diff_from_bundles(bundle_a: Path, bundle_b: Path) -> Tuple[str, str]:
             edge_kinds=edge_kinds,
             validation_findings=validation_findings,
             value_evidence=value_evidence,
+            schema_lock_section=schema_lock_section,
+            schema_changes_section=schema_changes_section,
+            contract_changed=contract_changed,
         ),
         indent=2,
         ensure_ascii=False,
