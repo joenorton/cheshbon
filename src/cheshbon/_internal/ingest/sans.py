@@ -182,6 +182,17 @@ def map_bundle_to_artifacts(bundle: SansBundle, bundle_dir: Path) -> Tuple[Graph
                 sorted_by=None
             )
 
+    # Thin mode: report is the witness; add table evidence from every datasource_inputs entry (no plan filter)
+    if bundle.report.bundle_mode == "thin" and bundle.report.datasource_inputs:
+        for entry in bundle.report.datasource_inputs:
+            table_evidence_by_name[entry.datasource] = _build_node_evidence(
+                path_str="",
+                sha256=entry.sha256,
+                row_count=None,
+                columns=None,
+                sorted_by=None,
+            )
+
     # Build artifact nodes from report artifacts
     for artifact_entry in bundle.report.artifacts:
         name = _node_name(artifact_entry.name, artifact_entry.path)
@@ -344,6 +355,11 @@ def map_bundle_to_artifacts(bundle: SansBundle, bundle_dir: Path) -> Tuple[Graph
         )
         if hash_val:
             input_hashes[name] = hash_val
+    # Thin mode: add datasource fingerprints (logical name -> sha256; no paths)
+    if bundle.report.bundle_mode == "thin" and bundle.report.datasource_inputs:
+        for entry in bundle.report.datasource_inputs:
+            if entry.sha256:
+                input_hashes[entry.datasource] = entry.sha256
 
     for output_entry in bundle.report.outputs:
         name = _node_name(output_entry.name, output_entry.path)
@@ -371,6 +387,7 @@ def map_bundle_to_artifacts(bundle: SansBundle, bundle_dir: Path) -> Tuple[Graph
     if evidence_hash and bundle.evidence_relpath:
         witnesses[bundle.evidence_relpath] = evidence_hash
 
+    # run_id and created_at are provenance-only; must NOT be used in fingerprint or identity logic
     run_id = (bundle.evidence.run_id if bundle.evidence else None) or bundle.report.run_id
     created_at = (bundle.evidence.created_at if bundle.evidence else None) or bundle.report.created_at
     if not run_id or not created_at:
@@ -449,6 +466,11 @@ def map_bundle_to_run_and_registry(
         )
         if hash_val:
             input_hashes[name] = hash_val
+    # Thin mode: add datasource fingerprints (logical name -> sha256; no paths)
+    if bundle.report.bundle_mode == "thin" and bundle.report.datasource_inputs:
+        for entry in bundle.report.datasource_inputs:
+            if entry.sha256:
+                input_hashes[entry.datasource] = entry.sha256
 
     for output_entry in bundle.report.outputs:
         name = _node_name(output_entry.name, output_entry.path)
@@ -476,6 +498,7 @@ def map_bundle_to_run_and_registry(
     if evidence_hash and bundle.evidence_relpath:
         witnesses[bundle.evidence_relpath] = evidence_hash
 
+    # run_id and created_at are provenance-only; must NOT be used in fingerprint or identity logic
     run_id = (bundle.evidence.run_id if bundle.evidence else None) or bundle.report.run_id
     created_at = (bundle.evidence.created_at if bundle.evidence else None) or bundle.report.created_at
     if not run_id or not created_at:

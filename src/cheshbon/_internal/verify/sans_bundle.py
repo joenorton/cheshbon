@@ -158,3 +158,37 @@ def verify_bundle(bundle: SansBundle, bundle_dir: Path) -> None:
                 ValidationCode.STEP_ID_CONFLICT,
                 f"Transform {t.transform_id} id mismatch. Based on spec, it should be {expected_tid}"
             )
+
+    # Thin-mode rules: bundle_mode == "thin" only; no file reads under inputs/data/
+    if bundle.report.bundle_mode == "thin":
+        if not bundle.report.datasource_inputs or len(bundle.report.datasource_inputs) == 0:
+            raise BundleVerificationError(
+                ValidationCode.INVALID_STRUCTURE,
+                "Thin bundle must have non-empty datasource_inputs",
+            )
+        settings_datasources = (bundle.report.settings or {}).get("datasources") or []
+        if isinstance(settings_datasources, list):
+            ds_names_in_report = {e.datasource for e in bundle.report.datasource_inputs}
+            for name in settings_datasources:
+                if name not in ds_names_in_report:
+                    raise BundleVerificationError(
+                        ValidationCode.INVALID_STRUCTURE,
+                        f"Thin bundle datasource_inputs must cover all settings.datasources; missing: {name!r}",
+                    )
+        for entry in bundle.report.datasource_inputs:
+            if entry.embedded:
+                raise BundleVerificationError(
+                    ValidationCode.INVALID_STRUCTURE,
+                    f"Thin bundle datasource_inputs entry {entry.datasource!r} must have embedded=false",
+                )
+            if not (entry.sha256 and entry.sha256.strip()):
+                raise BundleVerificationError(
+                    ValidationCode.INVALID_STRUCTURE,
+                    f"Thin bundle datasource_inputs entry {entry.datasource!r} must have non-empty sha256",
+                )
+            # size_bytes must be present (model enforces) and > 0; empty inputs are invalid
+            if entry.size_bytes <= 0:
+                raise BundleVerificationError(
+                    ValidationCode.INVALID_STRUCTURE,
+                    f"Thin bundle datasource_inputs entry {entry.datasource!r} must have size_bytes > 0",
+                )

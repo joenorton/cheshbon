@@ -128,6 +128,20 @@ class SansReportOutput(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
 
+class DatasourceInputEvidence(BaseModel):
+    """Per-datasource witness for thin bundles: logical name, embedded flag, sha256, size_bytes."""
+
+    datasource: str
+    embedded: bool
+    sha256: str
+    size_bytes: int
+    name: Optional[str] = None
+    path: Optional[str] = None
+    ref: Optional[str] = None
+
+    model_config = ConfigDict(extra="ignore")
+
+
 class PrimaryError(BaseModel):
     """Report primary_error: code, message, optional loc."""
 
@@ -149,6 +163,9 @@ class SansReport(BaseModel):
     status: Optional[str] = None
     primary_error: Optional[PrimaryError] = None
     schema_lock_sha256: Optional[str] = None
+    bundle_mode: Optional[str] = None  # "full" | "thin"; legacy omit
+    datasource_inputs: Optional[List[DatasourceInputEvidence]] = None
+    settings: Optional[Dict[str, Any]] = None  # e.g. settings.datasources for thin validation
 
     model_config = ConfigDict(extra="ignore")
 

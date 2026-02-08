@@ -17,7 +17,11 @@
     "timing"
   ],
   "properties": {
-    "report_schema_version": {"type": "string", "minLength": 1},
+    "report_schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Current version: 0.3. JSON artifacts are hashed using canonical JSON serialization."
+    },
     "status": {"enum": ["ok", "ok_warnings", "refused", "failed"]},
     "exit_code_bucket": {"enum": [0, 10, 20, 30, 31, 32, 50]},
     "primary_error": {
@@ -75,6 +79,21 @@
           }
         }
       }
+    },
+    "schema_lock_sha256": {"type": "string", "description": "SHA-256 of canonical lock JSON when a schema lock was used or emitted"},
+    "schema_lock_mode": {"type": "string", "enum": ["generated_only", "ran_and_emitted"], "description": "Present when --emit-schema-lock was used: generated_only = lock-only, ran_and_emitted = lock written after run"},
+    "lock_only": {"type": "boolean", "description": "True when run was lock-only (no execution)"},
+    "schema_lock_path": {"type": "string", "description": "Bundle-relative or absolute path to the emitted lock file"},
+    "schema_lock_emit_path": {"type": "string", "description": "Absolute path where the lock file was written"},
+    "schema_lock_used_path": {"type": "string", "description": "Resolved path to the schema lock file used (user-provided or autodiscovered)"},
+    "schema_lock_copied_path": {"type": "string", "description": "When a schema lock was used: bundle-relative path of lock copy in out_dir (e.g. schema.lock.json)"},
+    "schema_lock_auto_discovered": {"type": "boolean", "description": "True when sans run used a lock found next to the script (no --schema-lock passed)"},
+    "bundle_mode": {"type": "string", "enum": ["full", "thin"], "description": "Bundle mode: full = datasource bytes embedded; thin = only fingerprints in report"},
+    "bundle_format_version": {"type": "integer", "description": "Format version when bundle_mode is present (e.g. 1)"},
+    "datasource_inputs": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/datasource_input"},
+      "description": "v2 thin bundles: list of datasource witnesses (datasource, embedded, sha256, size_bytes)"
     }
   },
   "definitions": {
@@ -103,12 +122,15 @@
     },
     "input": {
       "type": "object",
-      "required": ["role", "name", "path", "sha256"],
+      "required": ["role", "name", "sha256"],
       "properties": {
         "role": {"type": "string", "enum": ["source", "preprocessed", "expanded", "datasource"]},
         "name": {"type": "string", "minLength": 1},
-        "path": {"type": "string", "minLength": 1},
-        "sha256": {"type": "string", "minLength": 1}
+        "path": {"type": "string", "minLength": 1, "description": "Bundle-relative path; optional when role is datasource and embedded is false"},
+        "sha256": {"type": "string", "minLength": 1},
+        "embedded": {"type": "boolean", "description": "For datasource role: true = file in bundle, false = only fingerprints recorded"},
+        "size_bytes": {"type": "integer", "description": "For datasource role: file size in bytes"},
+        "ref": {"type": "string", "description": "Optional opaque external reference"}
       }
     },
     "artifact": {
@@ -132,6 +154,19 @@
           "type": ["array", "null"],
           "items": {"type": "string"}
         }
+      }
+    },
+    "datasource_input": {
+      "type": "object",
+      "required": ["datasource", "embedded", "sha256", "size_bytes"],
+      "properties": {
+        "datasource": {"type": "string", "description": "Logical datasource name"},
+        "name": {"type": "string"},
+        "embedded": {"type": "boolean"},
+        "sha256": {"type": "string", "minLength": 1},
+        "size_bytes": {"type": "integer", "minimum": 0},
+        "path": {"type": "string"},
+        "ref": {"type": "string"}
       }
     }
   }

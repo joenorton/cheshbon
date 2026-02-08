@@ -67,3 +67,83 @@ def test_verify_unsupported_report_version(tmp_path):
         e.code == ValidationCode.INVALID_STRUCTURE.value and "Unsupported report_schema_version" in e.message
         for e in result.errors
     )
+
+
+def test_verify_thin_bundle_passes():
+    """Thin bundle with datasource_inputs and no inputs/data/ verifies successfully."""
+    bundle_path = Path("fixtures/demo_low/dl_out")
+    result = verify_sans_bundle(bundle_path)
+    assert result.ok
+    assert len(result.errors) == 0
+
+
+def test_verify_thin_missing_datasource_inputs_fails(tmp_path):
+    """Thin bundle with missing or empty datasource_inputs fails verification."""
+    bundle_dir = tmp_path / "thin_bad"
+    _copy_bundle(Path("fixtures/demo_low/dl_out"), bundle_dir)
+    report_path = bundle_dir / "report.json"
+    data = json.loads(report_path.read_text())
+    assert data.get("bundle_mode") == "thin"
+    data["datasource_inputs"] = []
+    report_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    result = verify_sans_bundle(bundle_dir)
+    assert not result.ok
+    assert any(
+        e.code == ValidationCode.INVALID_STRUCTURE.value and "datasource_inputs" in e.message
+        for e in result.errors
+    )
+
+
+def test_verify_thin_missing_sha256_fails(tmp_path):
+    """Thin bundle with empty sha256 in datasource_inputs entry fails verification."""
+    bundle_dir = tmp_path / "thin_bad_sha"
+    _copy_bundle(Path("fixtures/demo_low/dl_out"), bundle_dir)
+    report_path = bundle_dir / "report.json"
+    data = json.loads(report_path.read_text())
+    assert data.get("bundle_mode") == "thin" and data.get("datasource_inputs")
+    data["datasource_inputs"][0]["sha256"] = ""
+    report_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    result = verify_sans_bundle(bundle_dir)
+    assert not result.ok
+    assert any(
+        e.code == ValidationCode.INVALID_STRUCTURE.value and "sha256" in e.message
+        for e in result.errors
+    )
+
+
+def test_verify_thin_embedded_true_fails(tmp_path):
+    """Thin bundle with embedded=true in datasource_inputs entry fails verification."""
+    bundle_dir = tmp_path / "thin_bad_embedded"
+    _copy_bundle(Path("fixtures/demo_low/dl_out"), bundle_dir)
+    report_path = bundle_dir / "report.json"
+    data = json.loads(report_path.read_text())
+    assert data.get("bundle_mode") == "thin" and data.get("datasource_inputs")
+    data["datasource_inputs"][0]["embedded"] = True
+    report_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    result = verify_sans_bundle(bundle_dir)
+    assert not result.ok
+    assert any(
+        e.code == ValidationCode.INVALID_STRUCTURE.value and "embedded" in e.message
+        for e in result.errors
+    )
+
+
+def test_verify_thin_size_bytes_zero_fails(tmp_path):
+    """Thin bundle with size_bytes==0 in datasource_inputs entry fails verification."""
+    bundle_dir = tmp_path / "thin_bad_size"
+    _copy_bundle(Path("fixtures/demo_low/dl_out"), bundle_dir)
+    report_path = bundle_dir / "report.json"
+    data = json.loads(report_path.read_text())
+    assert data.get("bundle_mode") == "thin" and data.get("datasource_inputs")
+    data["datasource_inputs"][0]["size_bytes"] = 0
+    report_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
+    result = verify_sans_bundle(bundle_dir)
+    assert not result.ok
+    assert any(
+        e.code == ValidationCode.INVALID_STRUCTURE.value and "size_bytes" in e.message
+        for e in result.errors
+    )

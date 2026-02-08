@@ -52,22 +52,10 @@
     {
       "name": "runtime.evidence.json",
       "path": "artifacts/runtime.evidence.json",
-      "sha256": "8272ce33146db89e80d1beb7637bf77e4d01a61a5be310dedb4632ef1e5f494a"
+      "sha256": "b39e11626770832dfc7bb4362d357d84fa3e4f45d08ed982a8dc731f76bfafff"
     }
   ],
   "outputs": [
-    {
-      "name": "sorted_high",
-      "path": "outputs/sorted_high.csv",
-      "sha256": "b5f896a7a802b5ba48ac40ab4461a3f9bec245eb595f9b3100b80864d2be4f86",
-      "rows": 8,
-      "columns": [
-        "USUBJID",
-        "VISITNUM",
-        "A1C",
-        "label"
-      ]
-    },
     {
       "name": "sorted_high",
       "path": "outputs/sorted_high.csv",
@@ -98,7 +86,7 @@
   "timing": {
     "compile_ms": 0,
     "validate_ms": 0,
-    "execute_ms": 4
+    "execute_ms": 3
   },
   "schema_lock_used_path": "C:\\Users\\joeno\\Documents\\GitHub\\sans\\demo\\run_diff_clin_demo\\demo_low.schema.lock.json",
   "schema_lock_sha256": "65ead3010f0103d8be6692f9754ad8a2db60a6cfb33eefff42edeb817ff63344",
@@ -106,13 +94,25 @@
     "lb"
   ],
   "schema_lock_missing_datasources": [],
-  "report_sha256": "1ee1a3a7b30cc8456d6b9b2a2b280519ff07f2f58419672a153663465bb924eb",
+  "report_sha256": "6aee462e90ee5296c098545dc7b049e4e82bfdf9669a1724c596cc9a444cbf7a",
   "schema_lock_auto_discovered": true,
+  "bundle_mode": "thin",
+  "bundle_format_version": 1,
+  "datasource_inputs": [
+    {
+      "datasource": "lb",
+      "name": "lb.csv",
+      "embedded": false,
+      "sha256": "d9ed13453c556bdabde38abe33ddd5dd807dccb14e80390931ea7bb7a12b02e9",
+      "size_bytes": 355,
+      "ref": "sha256:d9ed13453c556bdabde38abe33ddd5dd807dccb14e80390931ea7bb7a12b02e9"
+    }
+  ],
   "schema_lock_copied_path": "schema.lock.json",
   "runtime": {
     "status": "ok",
     "timing": {
-      "execute_ms": 4
+      "execute_ms": 3
     }
   }
 }

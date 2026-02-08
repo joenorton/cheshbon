@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 import cheshbon.api as kernel_api
 from cheshbon.adapters.sans_bundle import normalize_vars_graph, run_diff_from_bundles
 
@@ -924,3 +926,28 @@ def test_run_diff_refused_bundle_surfaces_refusal_and_skips_diffs(tmp_path: Path
     assert "a" in report["refusal_info"]
     assert report["refusal_info"]["a"]["code"] == "E_SCHEMA_REQUIRED"
     assert report["impacted"] == []
+
+
+def test_run_diff_thin_vs_thin():
+    """Run-diff two thin bundles (no inputs/data/) produces impact/diff without errors."""
+    bundle_low = Path("fixtures/demo_low/dl_out")
+    bundle_high = Path("fixtures/demo_high/dh_out")
+    if not bundle_low.exists() or not bundle_high.exists():
+        pytest.skip("demo_low/dl_out or demo_high/dh_out not found")
+    _md, json_content = run_diff_from_bundles(bundle_low, bundle_high)
+    report = json.loads(json_content)
+    assert "impacted" in report
+    assert "change_events" in report
+    assert "schema_lock" in report or "refusal_info" in report
+
+
+def test_run_diff_full_vs_thin():
+    """Run-diff full bundle (graph_diff/ex1 has inputs/data/) vs thin bundle (dl_out) runs without errors."""
+    bundle_full = Path("fixtures/graph_diff/ex1")
+    bundle_thin = Path("fixtures/demo_low/dl_out")
+    if not bundle_full.exists() or not bundle_thin.exists():
+        pytest.skip("graph_diff/ex1 or demo_low/dl_out not found")
+    _md, json_content = run_diff_from_bundles(bundle_full, bundle_thin)
+    report = json.loads(json_content)
+    assert "impacted" in report
+    assert "change_events" in report
